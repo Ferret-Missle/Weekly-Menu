@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { ModeContextProvider } from "./contexts/ModeContext";
-import Auth from "./features/Authentication/Auth.tsx";
+import { ModeContextProvider } from './contexts/ModeContextProvider.tsx';
+import Auth from './features/Authentication/Auth.tsx';
 
 const App: React.FC = () => {
 	return (

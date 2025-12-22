@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { LoginTypography } from './components/AuthText';
+import { AuthModeSwitch } from './components/AuthModeSwitch';
 import { AuthWrapper } from './components/AuthWrapper';
-import { Form } from './components/Form';
+import { SigninForm } from './components/SigninForm';
+import { SignupForm } from './components/SignupForm';
+import { LoginTypography } from './styles/AuthText';
 
-export const Auth: React.FC = () => {
+const Auth: React.FC = () => {
+	const [mode, setMode] = useState("signin");
+	const handleMode = () => {
+		setMode(mode === "signin" ? "signup" : "signin");
+	};
+
 	return (
 		<AuthWrapper>
 			<>
 				<LoginTypography role="title">献立スケジュール</LoginTypography>
 				<LoginTypography role="subtitle">
-					週間献立プランとレシピ、買い物リストを管理
+					週間献立プランとレシピを管理
 				</LoginTypography>
 			</>
-			<Form />
+			<AuthModeSwitch mode={mode} handleMode={handleMode} />
+			{mode === "signin" ? <SigninForm /> : <SignupForm />}
 		</AuthWrapper>
 	);
 };
+
+export default Auth;
