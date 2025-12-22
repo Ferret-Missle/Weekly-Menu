@@ -91,7 +91,7 @@ export const SignupForm: React.FC = () => {
 				variant="contained"
 				fullWidth
 				type="submit"
-				disabled={!email || !password}
+				disabled={!email || !password || !agree}
 				sx={{ mt: 2, borderRadius: 2 }}
 			>
 				新規登録

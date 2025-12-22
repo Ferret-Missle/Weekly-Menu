@@ -85,7 +85,13 @@ export const SigninForm: React.FC = () => {
 				}
 				sx={{ ml: 0.5 }}
 			/>
-			<Button variant="contained" fullWidth sx={{ mt: 2, borderRadius: 2 }}>
+			<Button
+				variant="contained"
+				fullWidth
+				type="submit"
+				disabled={!email || !password}
+				sx={{ mt: 2, borderRadius: 2 }}
+			>
 				ログイン
 			</Button>
 		</Box>
