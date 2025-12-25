@@ -1,23 +1,31 @@
 import React from 'react';
 
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 
-import { ThemeModeSwitcher } from '../../../contexts/ThemeModeSitcher';
+import { ThemeModeSwitcher } from "../../../contexts/ThemeModeSitcher";
 
 import type { ReactNode } from "react";
 export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
 	return (
-		<>
+		<Box
+			component="header"
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				minWidth: "100vw",
+			}}
+		>
 			<Container
-				component="header"
 				sx={{
-					minWidth: "100vw",
 					display: "flex",
 					justifyContent: "right",
+					minWidth: "100vw",
+					height: "auto",
 				}}
 			>
 				<ThemeModeSwitcher />
@@ -25,11 +33,10 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 			<Container
 				component="main"
 				sx={{
-					minHeight: "100vh",
-					minWidth: "100vw",
 					display: "flex",
-					alignItems: "center",
 					justifyContent: "center",
+					alignItems: "center",
+					minWidth: "100vw",
 				}}
 			>
 				<Paper
@@ -43,7 +50,8 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 						maxWidth: "450px",
 						borderRadius: 3,
 						p: 2,
-						m: 4,
+						mt: 8,
+						mx: 2,
 					}}
 				>
 					<Stack spacing={2} direction={"column"} sx={{ margin: 1 }}>
@@ -51,6 +59,15 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 					</Stack>
 				</Paper>
 			</Container>
-		</>
+		</Box>
+		// 	<Container
+		// 		component="main"
+		// 		sx={{
+		// 			// minHeight: "100vh",
+		// 			minWidth: "100vw",
+		// 			display: "flex",
+		// 			alignItems: "center",
+		// 			justifyContent: "center",
+		// 		}}
 	);
 };
