@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ModeContext } from './ModeContext';
+import { ModeContext } from '../../../../contexts/ModeContext';
 
 export const useModeContext = () => {
 	const context = useContext(ModeContext);
