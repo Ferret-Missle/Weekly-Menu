@@ -6,7 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 
-import { LoginTypography } from '../styles/AuthText';
+import { LoginTypography } from '../../../styles/AuthText';
 
 export const SigninForm: React.FC = () => {
 	const [email, setEmail] = useState(""); //メールアドレスステート
@@ -83,7 +83,6 @@ export const SigninForm: React.FC = () => {
 				label={
 					<LoginTypography role="caption">パスワードを表示</LoginTypography>
 				}
-				sx={{ ml: 0.5 }}
 			/>
 			<Button
 				variant="contained"

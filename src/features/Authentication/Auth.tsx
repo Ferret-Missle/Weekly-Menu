@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 
+import Divider from '@mui/material/Divider';
+
+import { LoginTypography } from '../../styles/AuthText';
 import { AuthModeSwitch } from './components/AuthModeSwitch';
 import { AuthWrapper } from './components/AuthWrapper';
 import { SigninForm } from './components/SigninForm';
 import { SignupForm } from './components/SignupForm';
-import { LoginTypography } from './styles/AuthText';
+import { SignWithGoogle } from './components/SignupWithGoogle';
+
+export type SignMode = "signup" | "signin";
 
 const Auth: React.FC = () => {
-	const [mode, setMode] = useState("signin");
+	const [mode, setMode] = useState<SignMode>("signin");
 	const handleMode = () => {
 		setMode(mode === "signin" ? "signup" : "signin");
 	};
@@ -22,6 +27,10 @@ const Auth: React.FC = () => {
 			</>
 			<AuthModeSwitch mode={mode} handleMode={handleMode} />
 			{mode === "signin" ? <SigninForm /> : <SignupForm />}
+			<Divider>
+				<LoginTypography role="caption">or</LoginTypography>
+			</Divider>
+			<SignWithGoogle mode={mode} />
 		</AuthWrapper>
 	);
 };

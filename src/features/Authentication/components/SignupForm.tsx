@@ -6,7 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 
-import { LoginTypography } from '../styles/AuthText';
+import { LoginTypography } from '../../../styles/AuthText';
 
 export const SignupForm: React.FC = () => {
 	const [email, setEmail] = useState(""); //メールアドレスステート
