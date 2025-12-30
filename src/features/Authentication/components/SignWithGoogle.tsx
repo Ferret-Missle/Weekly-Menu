@@ -1,11 +1,11 @@
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup } from 'firebase/auth';
 
-import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
 
-import googleIcon from "../../../assets/google.svg";
-import { auth, provider } from "../../../providers/firebase";
-import { LoginTypography } from "../../../styles/AuthText";
+import googleIcon from '../../../assets/google.svg';
+import { auth, provider } from '../../../providers/firebase';
+import { LoginTypography } from '../../../styles/AuthText';
 
 export const SignWithGoogle: React.FC<{ mode: string }> = ({ mode }) => {
 	return (
@@ -25,9 +25,10 @@ export const SignWithGoogle: React.FC<{ mode: string }> = ({ mode }) => {
 
 const signInWithGoogle = async () => {
 	try {
-	await signInWithPopup(auth, provider);
+		const result = await signInWithPopup(auth, provider);
+		console.log("success:", result.user.email);
 	} catch (error: unknown) {
-		console.log(error);
+		console.error(error);
 		return error;
 	}
 };
