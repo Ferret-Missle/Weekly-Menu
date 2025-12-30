@@ -1,5 +1,5 @@
 import type { User } from "firebase/auth";
-import { createContext, useContext } from 'react';
+import { atom } from 'jotai';
 
 export type AppUser = {
 	firebaseUser: User | null;
@@ -8,5 +8,4 @@ export type AppUser = {
 	role: "owner" | "member" | null;
 };
 
-const UserContext = createContext<AppUser | null>(null);
-export const useAuth = () => useContext(UserContext);
+export const user = atom<AppUser | null>(null);

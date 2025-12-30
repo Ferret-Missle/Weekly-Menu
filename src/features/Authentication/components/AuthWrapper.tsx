@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 
-import { ThemeModeSwitcher } from "./ModeParts/ThemeModeSwitcher";
+import { ThemeModeSwitcher } from './ModeParts/ThemeModeSwitcher';
 
 import type { ReactNode } from "react";
 export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
@@ -60,14 +60,5 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 				</Paper>
 			</Container>
 		</Box>
-		// 	<Container
-		// 		component="main"
-		// 		sx={{
-		// 			// minHeight: "100vh",
-		// 			minWidth: "100vw",
-		// 			display: "flex",
-		// 			alignItems: "center",
-		// 			justifyContent: "center",
-		// 		}}
 	);
 };
