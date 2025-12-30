@@ -25,10 +25,24 @@ export const SigninForm: React.FC = () => {
 	const validatePassword = (value: string) => {
 		if (!value) return "パスワードを入力してください";
 		if (value.length < 6) return "パスワードは6文字以上で入力してください";
+		if (!/[a-z]/.test(value))
+			return "パスワードには小文字（a-z）を少なくとも1文字含めてください";
+		if (!/[A-Z]/.test(value))
+			return "パスワードには大文字（A-Z）を少なくとも1文字含めてください";
+		if (!/[0-9]/.test(value))
+			return "パスワードには数字（0-9）を少なくとも1文字含めてください";
 		return "";
 	};
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		const emailErr = validateEmail(email);
+		const passwordErr = validatePassword(password);
+		setEmailError(emailErr || null);
+		setPasswordError(passwordErr || null);
+
+		if (!emailErr && !passwordErr) {
+			console.log("ログイン実行");
+		}
 	};
 	const handleClickShowPassword = () => {
 		setShowPassword(!showPassword);
@@ -44,10 +58,8 @@ export const SigninForm: React.FC = () => {
 				autoComplete="email"
 				autoFocus
 				value={email}
-				onChange={(e) => {
-					setEmail(e.target.value);
-					if (emailError) setEmailError(validateEmail(e.target.value));
-				}}
+				onChange={(e) => setEmail(e.target.value)}
+				onBlur={() => setEmailError(validateEmail(email) || null)}
 				error={!!emailError}
 				helperText={emailError}
 				sx={{
@@ -66,10 +78,8 @@ export const SigninForm: React.FC = () => {
 				type={showPassword ? "text" : "password"}
 				autoComplete="current-password"
 				value={password}
-				onChange={(e) => {
-					setPassword(e.target.value);
-					if (passwordError) setPasswordError(validatePassword(e.target.value));
-				}}
+				onChange={(e) => setPassword(e.target.value)}
+				onBlur={() => setPasswordError(validatePassword(password) || null)}
 				error={!!passwordError}
 				helperText={passwordError}
 				sx={{
