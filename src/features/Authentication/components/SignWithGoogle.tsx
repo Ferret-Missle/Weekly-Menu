@@ -1,10 +1,10 @@
-import { signInWithPopup } from "firebase/auth";
+// import { signInWithPopup } from "firebase/auth";
 
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 
 import googleIcon from "../../../assets/google.svg";
-import { auth, provider } from "../../../providers/firebase";
+// import { auth, provider } from "../../../providers/firebase";
 import { LoginTypography } from "../../../styles/AuthText";
 
 export const SignWithGoogle: React.FC<{ mode: string }> = ({ mode }) => {
@@ -25,7 +25,7 @@ export const SignWithGoogle: React.FC<{ mode: string }> = ({ mode }) => {
 
 const signInWithGoogle = async () => {
 	// try {
-	await signInWithPopup(auth, provider);
+	// await signInWithPopup(auth, provider);
 	// } catch (error: unknown) {
 	// 	console.log(error);
 	// 	return error;
