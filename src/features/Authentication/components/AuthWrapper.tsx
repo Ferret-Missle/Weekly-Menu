@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 
-import { ThemeModeSwitcher } from './ModeParts/ThemeModeSwitcher';
+import { ThemeModeSwitcher } from '../../Common/ThemeModeSwitcher';
 
 import type { ReactNode } from "react";
 export const AuthWrapper: React.FC<{ children: ReactNode }> = ({

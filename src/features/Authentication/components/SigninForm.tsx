@@ -1,5 +1,6 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,12 +11,13 @@ import TextField from '@mui/material/TextField';
 import { auth } from '../../../providers/firebase';
 import { LoginTypography } from '../../../styles/AuthText';
 
-export const SigninForm: React.FC = () => { 
+export const SigninForm: React.FC = () => {
 	const [email, setEmail] = useState(""); //メールアドレスステート
 	const [password, setPassword] = useState(""); //パスワードステート
 	const [emailError, setEmailError] = useState<string | null>(null);
 	const [passwordError, setPasswordError] = useState<string | null>(null);
 	const [showPassword, setShowPassword] = useState(false); //パスワード表示切替
+	const navi = useNavigate();
 
 	const validateEmail = (value: string) => {
 		if (!value) return "メールアドレスを入力してください";
@@ -43,15 +45,17 @@ export const SigninForm: React.FC = () => {
 		setPasswordError(passwordErr || null);
 
 		if (!emailErr && !passwordErr) {
-			console.log("ログイン実行");
 			signInWithEmail();
 		}
 	};
 	const signInWithEmail = async () => {
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
+			console.log("ログイン成功");
+			navi("/Calendar");
 		} catch (error: unknown) {
 			if (error instanceof Error) setEmailError(error.message);
+			console.log("ログイン失敗");
 		}
 	};
 	const handleClickShowPassword = () => setShowPassword(!showPassword);

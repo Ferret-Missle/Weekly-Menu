@@ -11,7 +11,6 @@ export const AuthModeSwitch: React.FC<{
 	handleMode: () => void;
 }> = ({ mode, handleMode }) => {
 	const context = useContext(ModeContext);
-	console.log("context=", context);
 
 	return (
 		<Container
