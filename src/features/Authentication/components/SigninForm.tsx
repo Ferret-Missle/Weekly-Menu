@@ -1,3 +1,4 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -6,9 +7,10 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
 
+import { auth } from '../../../providers/firebase';
 import { LoginTypography } from '../../../styles/AuthText';
 
-export const SigninForm: React.FC = () => {
+export const SigninForm: React.FC = () => { 
 	const [email, setEmail] = useState(""); //メールアドレスステート
 	const [password, setPassword] = useState(""); //パスワードステート
 	const [emailError, setEmailError] = useState<string | null>(null);
@@ -42,11 +44,17 @@ export const SigninForm: React.FC = () => {
 
 		if (!emailErr && !passwordErr) {
 			console.log("ログイン実行");
+			signInWithEmail();
 		}
 	};
-	const handleClickShowPassword = () => {
-		setShowPassword(!showPassword);
+	const signInWithEmail = async () => {
+		try {
+			await signInWithEmailAndPassword(auth, email, password);
+		} catch (error: unknown) {
+			if (error instanceof Error) setEmailError(error.message);
+		}
 	};
+	const handleClickShowPassword = () => setShowPassword(!showPassword);
 
 	return (
 		<Box component="form" onSubmit={handleSubmit} sx={{ mt: 0 }}>
