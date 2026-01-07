@@ -9,8 +9,7 @@ import { firebaseUser } from '../../../../contexts/FirebaseUserContext';
 export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
 	const user = useAtomValue(firebaseUser);
 	const navi = useNavigate();
-
-	console.log("現在のuser状態：", user);
+	// console.log("現在のuser状態：", user);
 
 	if (user === undefined) {
 		//ログイン試行中
