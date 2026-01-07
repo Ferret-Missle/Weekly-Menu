@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
 import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
 
-import { user } from '../../contexts/UserContext';
 import { LoginTypography } from '../../styles/AuthText';
 import { AuthWrapper } from './components/AuthWrapper';
 import { AuthModeSwitch } from './components/ModeParts/AuthModeSwitch';
