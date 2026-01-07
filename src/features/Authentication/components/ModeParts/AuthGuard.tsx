@@ -19,9 +19,6 @@ export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
 			</Box>
 		);
 	}
-	if (user === null) {
-		//未ログイン
-		navi("/");
-	}
-	return children;
+	if (user === null) navi("/");//未ログイン時
+	return children;//正常表示
 };
