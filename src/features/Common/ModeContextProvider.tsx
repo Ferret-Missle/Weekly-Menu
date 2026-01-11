@@ -4,7 +4,7 @@ import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import { ModeContext } from '../../../../contexts/ModeContext';
+import { ModeContext } from '../../contexts/ModeContext';
 
 import type { ReactNode } from "react";
 import type { PaletteMode } from "@mui/material";

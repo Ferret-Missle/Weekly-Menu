@@ -1,8 +1,8 @@
-import Typography from "@mui/material/Typography";
+import Typography from '@mui/material/Typography';
 
 import type { TypographyProps } from "@mui/material/Typography";
 
-type LoginTypographyProps = TypographyProps & {
+export type LoginTypographyProps = TypographyProps & {
 	role?: "title" | "subtitle" | "link" | "error" | "caption";
 };
 

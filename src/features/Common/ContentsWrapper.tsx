@@ -1,33 +1,32 @@
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+import Box from '@mui/material/Box';
 
-import { SignoutButton } from "./SignoutButton";
-import { ThemeModeSwitcher } from "./ThemeModeSwitcher";
+import { ContentsFooter } from './ContentsFooter';
+import { ContetnsHeader } from './ContentsHeader';
 
-// import type { ReactNode } from "react";
-// export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
-// 	children,
-// }) => {
-export const ContentsWrapper = () => {
+import type { ReactNode } from "react";
+export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
+	children,
+}) => {
 	return (
 		<Box
 			sx={{
 				display: "flex",
 				flexDirection: "column",
 				minWidth: "100vw",
+				minHeight: "100vh",
 			}}
 		>
-			<Container
+			<ContetnsHeader />
+			<Box
+				component="main"
 				sx={{
 					display: "flex",
-					justifyContent: "right",
-					minWidth: "100vw",
-					height: "auto",
+					flexGrow: 1,
 				}}
 			>
-				<SignoutButton />
-				<ThemeModeSwitcher />
-			</Container>
+				{children}
+			</Box>
+			<ContentsFooter />
 		</Box>
 	);
 };
