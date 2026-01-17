@@ -1,13 +1,10 @@
-import React from 'react';
-
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-
-import { ThemeModeSwitcher } from '../../Common/ThemeModeSwitcher';
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 
 import type { ReactNode } from "react";
+
 export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
@@ -27,9 +24,7 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 					minWidth: "100vw",
 					height: "auto",
 				}}
-			>
-				<ThemeModeSwitcher />
-			</Container>
+			></Container>
 			<Container
 				component="main"
 				sx={{

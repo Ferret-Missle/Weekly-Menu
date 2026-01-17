@@ -1,29 +1,17 @@
-import { useMemo, useState } from 'react';
+import { useAtomValue } from "jotai";
+import { useMemo } from "react";
 
-import { ThemeProvider } from '@emotion/react';
-import { createTheme } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 
-import { ModeContext } from '../../contexts/ModeContext';
+import { themeMode } from "../contexts/themeContext";
 
 import type { ReactNode } from "react";
-import type { PaletteMode } from "@mui/material";
 
-export const ModeContextProvider: React.FC<{ children: ReactNode }> = ({
+export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
-	const [mode, setMode] = useState<PaletteMode>("light");
-	const colorMode = useMemo(
-		() => ({
-			mode,
-			toggleColorMode: () => {
-				setMode((prevMode: PaletteMode) =>
-					prevMode === "light" ? "dark" : "light"
-				);
-			},
-		}),
-		[mode]
-	);
+	const mode = useAtomValue(themeMode);
 	const theme = useMemo(
 		() =>
 			createTheme({
@@ -53,7 +41,7 @@ export const ModeContextProvider: React.FC<{ children: ReactNode }> = ({
 									primary: "#202124", // 非常に濃いグレー（真っ黒ではない）
 									secondary: "#5F6368",
 								},
-						  }
+							}
 						: {
 								// ダークモード
 								background: {
@@ -67,18 +55,16 @@ export const ModeContextProvider: React.FC<{ children: ReactNode }> = ({
 									primary: "#E8EAED", // 柔らかい白
 									secondary: "#9AA0A6",
 								},
-						  }),
+							}),
 				},
 			}),
-		[mode]
+		[mode],
 	);
 
 	return (
-		<ModeContext.Provider value={colorMode}>
-			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				{children}
-			</ThemeProvider>
-		</ModeContext.Provider>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			{children}
+		</ThemeProvider>
 	);
 };
