@@ -3,8 +3,9 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 
-import type { ReactNode } from "react";
+import { ThemeSwitch } from "../../common/views/ThemeSwitch";
 
+import type { ReactNode } from "react";
 export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
@@ -24,7 +25,9 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 					minWidth: "100vw",
 					height: "auto",
 				}}
-			></Container>
+			>
+				<ThemeSwitch />
+			</Container>
 			<Container
 				component="main"
 				sx={{

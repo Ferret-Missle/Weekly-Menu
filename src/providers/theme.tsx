@@ -1,10 +1,10 @@
-import { useAtomValue } from "jotai";
-import { useMemo } from "react";
+import { useAtomValue } from 'jotai';
+import { useMemo } from 'react';
 
-import { createTheme, ThemeProvider } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 
-import { themeMode } from "../contexts/themeContext";
+import { themeMode } from '../contexts/ThemeContext';
 
 import type { ReactNode } from "react";
 
