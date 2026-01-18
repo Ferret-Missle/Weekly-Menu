@@ -16,6 +16,7 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 				display: "flex",
 				flexDirection: "column",
 				minWidth: "100vw",
+				bgcolor: "background.default",
 			}}
 		>
 			<Container
@@ -50,6 +51,7 @@ export const AuthWrapper: React.FC<{ children: ReactNode }> = ({
 						p: 2,
 						mt: 8,
 						mx: 2,
+						bgcolor: "background.paper",
 					}}
 				>
 					<Stack spacing={2} direction={"column"} sx={{ margin: 1 }}>

@@ -8,6 +8,20 @@ import { themeMode } from '../contexts/ThemeContext';
 
 import type { ReactNode } from "react";
 
+declare module "@mui/material/styles" {
+	interface Palette {
+		customBackground: {
+			container: string;
+			button: string;
+		};
+	}
+	interface PaletteOptions {
+		customBackground?: {
+			container?: string;
+			button?: string;
+		};
+	}
+}
 export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
@@ -36,6 +50,7 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 								},
 								customBackground: {
 									container: "#E8EAED",
+									button: "#FFFFFF",
 								},
 								text: {
 									primary: "#202124", // 非常に濃いグレー（真っ黒ではない）
@@ -49,7 +64,8 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 									paper: "#2D2D2D", // コンテンツが乗る「少し明るい」グレー
 								},
 								customBackground: {
-									container: "#3C4043",
+									container: "#1F1F1F",
+									button: "#444444",
 								},
 								text: {
 									primary: "#E8EAED", // 柔らかい白

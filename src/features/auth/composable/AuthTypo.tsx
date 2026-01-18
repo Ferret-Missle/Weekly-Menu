@@ -30,7 +30,7 @@ export const AuthTypo = ({ role, children, sx, ...props }: AuthTypoType) => {
 		},
 		text: {
 			textAlign: "center",
-			fontSize: 14,
+			fontSize: 12,
 			fontWeight: "medium",
 			color: "text.primary",
 		},
