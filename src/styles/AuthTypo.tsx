@@ -13,7 +13,7 @@ export const AuthTypo = ({ role, children, sx, ...props }: AuthTypoType) => {
 		subtitle: {
 			textAlign: "center",
 			fontSize: 16,
-			fontWeight: "medium",
+			fontWeight: "thin",
 			color: "text.secondary",
 		},
 		label: {
@@ -25,7 +25,7 @@ export const AuthTypo = ({ role, children, sx, ...props }: AuthTypoType) => {
 		hint: {
 			textAlign: "left",
 			fontSize: 14,
-			fontWeight: "medium",
+			fontWeight: "thin",
 			color: "text.secondary",
 		},
 		text: {
@@ -33,6 +33,12 @@ export const AuthTypo = ({ role, children, sx, ...props }: AuthTypoType) => {
 			fontSize: 12,
 			fontWeight: "medium",
 			color: "text.primary",
+		},
+		error: {
+			textAlign: "left",
+			fontSize: 14,
+			fontWeight: "thin",
+			color: "error.main",
 		},
 	};
 
