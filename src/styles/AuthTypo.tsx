@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 
-import type { AuthTypoType } from "../../../types/types";
+import type { AuthTypoType } from "../types/types";
 
 export const AuthTypo = ({ role, children, sx, ...props }: AuthTypoType) => {
 	const roleStyles = {

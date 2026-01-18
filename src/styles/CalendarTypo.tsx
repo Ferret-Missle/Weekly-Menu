@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 
-import type { ContentsTypoType } from "../../../types/types";
+import type { ContentsTypoType } from "../types/types";
 
 export const ContentsTypography = ({
 	role,
