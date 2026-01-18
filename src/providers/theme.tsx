@@ -56,6 +56,10 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 									primary: "#202124", // 非常に濃いグレー（真っ黒ではない）
 									secondary: "#5F6368",
 								},
+								icon: {
+									active: "#f38f60",
+									inactive: "#202124",
+								},
 							}
 						: {
 								// ダークモード

@@ -7,6 +7,9 @@ export type AuthMode = "signup" | "signin";
 export type AuthTypoType = TypographyProps & {
 	role: "title" | "subtitle" | "label" | "hint" | "text" | "error";
 };
+
+//Contents
+export type ContentsModeType = 'calendar' | 'recipe' | 'list';
 export type ContentsTypoType = TypographyProps & {
 	role:
 		| "header"

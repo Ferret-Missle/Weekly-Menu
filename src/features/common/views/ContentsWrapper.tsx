@@ -1,3 +1,5 @@
+import { useAtom } from "jotai";
+
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -7,11 +9,13 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 
+import { contentsMode } from "../../../contexts/ContentsModeContext";
 import { ContentsTypography } from "../../../styles/CalendarTypo";
 import { SignoutButton } from "./SignoutButton";
 import { ThemeSwitch } from "./ThemeSwitch";
 
 import type { ReactNode } from "react";
+import type { ContentsModeType } from "../../../types/types";
 export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
@@ -76,44 +80,14 @@ const ContentsNavigator = () => {
 					justifyContent="space-evenly"
 					sx={{ width: "100%" }}
 				>
-					<ButtonWrapper>
-						<Stack
-							direction="column"
-							spacing={0.5}
-							sx={{ alignItems: "center" }}
-						>
-							<CalendarMonthOutlinedIcon
-								fontSize="large"
-								sx={{ color: "text.primary" }}
-							/>
-							<ContentsTypography role="sub">献立プラン</ContentsTypography>
-						</Stack>
+					<ButtonWrapper caption="calendar">
+						<CalendarMonthOutlinedIcon fontSize="large" />
 					</ButtonWrapper>
-					<ButtonWrapper>
-						<Stack
-							direction="column"
-							spacing={0.5}
-							sx={{ alignItems: "center" }}
-						>
-							<AutoStoriesOutlinedIcon
-								fontSize="large"
-								sx={{ color: "text.primary" }}
-							/>
-							<ContentsTypography role="sub">レシピ</ContentsTypography>
-						</Stack>
+					<ButtonWrapper caption="recipe">
+						<AutoStoriesOutlinedIcon fontSize="large" />
 					</ButtonWrapper>
-					<ButtonWrapper>
-						<Stack
-							direction="column"
-							spacing={0.5}
-							sx={{ alignItems: "center" }}
-						>
-							<ShoppingCartOutlinedIcon
-								fontSize="large"
-								sx={{ color: "text.primary" }}
-							/>
-							<ContentsTypography role="sub">買い物リスト</ContentsTypography>
-						</Stack>
+					<ButtonWrapper caption="list">
+						<ShoppingCartOutlinedIcon fontSize="large" />
 					</ButtonWrapper>
 				</Stack>
 			</Toolbar>
@@ -121,6 +95,41 @@ const ContentsNavigator = () => {
 	);
 };
 
-const ButtonWrapper: React.FC<{ children: ReactNode }> = ({ children }) => {
-	return <Button sx={{ width: "100%" }}>{children}</Button>;
+const ButtonWrapper = ({
+	children,
+	caption,
+}: {
+	children: ReactNode;
+	caption: ContentsModeType;
+}) => {
+	const [mode, setMode] = useAtom(contentsMode);
+	let buttonCaption = "";
+	if (caption === "calendar") {
+		buttonCaption = "献立プラン";
+	} else if (caption === "recipe") {
+		buttonCaption = "レシピ";
+	} else if (caption === "list") {
+		buttonCaption = "買い物リスト";
+	}
+
+	return (
+		<Button sx={{ width: "100%" }} onClick={() => setMode(caption)}>
+			<Stack
+				direction="column"
+				spacing={0.5}
+				sx={{
+					alignItems: "center",
+					color: mode === caption ? "icon.active" : "icon.inactive",
+				}}
+			>
+				{children}
+				<ContentsTypography
+					role="sub"
+					sx={{ color: mode === caption ? "icon.active" : "icon.inactive" }}
+				>
+					{buttonCaption}
+				</ContentsTypography>
+			</Stack>
+		</Button>
+	);
 };
