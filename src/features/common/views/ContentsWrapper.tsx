@@ -1,18 +1,19 @@
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from "jotai";
 
-import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Toolbar from '@mui/material/Toolbar';
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Toolbar from "@mui/material/Toolbar";
 
-import { contentsMode } from '../../../contexts/ContentsModeContext';
-import { ContentsTypography } from '../../../styles/CalendarTypo';
-import { SignoutButton } from './SignoutButton';
-import { ThemeSwitch } from './ThemeSwitch';
+import { contentsMode } from "../../../contexts/ContentsModeContext";
+import { ContentsTypography } from "../../../styles/CalendarTypo";
+import { showHeaderTitle } from "../composable/showHeaderTitle";
+import { SignoutButton } from "./SignoutButton";
+import { ThemeSwitch } from "./ThemeSwitch";
 
 import type { ReactNode } from "react";
 import type { ContentsModeType } from "../../../types/types";
@@ -24,7 +25,6 @@ export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 			sx={{
 				display: "flex",
 				flexDirection: "column",
-				minWidth: "100vw",
 				minHeight: "100vh",
 			}}
 		>
@@ -32,11 +32,13 @@ export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 			<Box
 				component="main"
 				sx={{
-					display: "flex",
 					flexGrow: 1,
+					overflow: "auto",
+					pt: 6,
+					pb: 8,
 				}}
 			>
-				{children}
+				<Box sx={{ p: 2 }}>{children}</Box>
 			</Box>
 			<ContentsNavigator />
 		</Box>
@@ -44,6 +46,7 @@ export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 };
 
 const ContentsHeader = () => {
+	const mode = useAtomValue(contentsMode);
 	return (
 		<AppBar
 			position="fixed"
@@ -54,9 +57,12 @@ const ContentsHeader = () => {
 				boxShadow: "none",
 			}}
 		>
-			<Toolbar variant="dense" sx={{ justifyContent: "flex-end" }}>
-				<SignoutButton />
+			<Toolbar variant="dense">
+				<ContentsTypography role="header" sx={{ flexGrow: 1 }}>
+					{showHeaderTitle(mode)}
+				</ContentsTypography>
 				<ThemeSwitch />
+				<SignoutButton />
 			</Toolbar>
 		</AppBar>
 	);
