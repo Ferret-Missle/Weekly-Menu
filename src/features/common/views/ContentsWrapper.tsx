@@ -1,18 +1,18 @@
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 
-import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Toolbar from "@mui/material/Toolbar";
+import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Toolbar from '@mui/material/Toolbar';
 
-import { contentsMode } from "../../../contexts/ContentsModeContext";
-import { ContentsTypography } from "../../../styles/CalendarTypo";
-import { SignoutButton } from "./SignoutButton";
-import { ThemeSwitch } from "./ThemeSwitch";
+import { contentsMode } from '../../../contexts/ContentsModeContext';
+import { ContentsTypography } from '../../../styles/CalendarTypo';
+import { SignoutButton } from './SignoutButton';
+import { ThemeSwitch } from './ThemeSwitch';
 
 import type { ReactNode } from "react";
 import type { ContentsModeType } from "../../../types/types";
@@ -81,13 +81,13 @@ const ContentsNavigator = () => {
 					sx={{ width: "100%" }}
 				>
 					<ButtonWrapper caption="calendar">
-						<CalendarMonthOutlinedIcon fontSize="large" />
+						<CalendarMonthOutlinedIcon sx={{ fontSize: "28px" }} />
 					</ButtonWrapper>
 					<ButtonWrapper caption="recipe">
-						<AutoStoriesOutlinedIcon fontSize="large" />
+						<AutoStoriesOutlinedIcon sx={{ fontSize: "28px" }} />
 					</ButtonWrapper>
 					<ButtonWrapper caption="list">
-						<ShoppingCartOutlinedIcon fontSize="large" />
+						<ShoppingCartOutlinedIcon sx={{ fontSize: "28px" }} />
 					</ButtonWrapper>
 				</Stack>
 			</Toolbar>

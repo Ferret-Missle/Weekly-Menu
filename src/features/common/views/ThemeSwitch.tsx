@@ -12,7 +12,7 @@ export const ThemeSwitch = () => {
 	const toggleTheme = useToggleTheme();
 
 	return (
-		<IconButton onClick={toggleTheme}>
+		<IconButton sx={{ fontSize: "24px" }} onClick={toggleTheme}>
 			{mode === "light" ? (
 				<Brightness4OutlinedIcon />
 			) : (

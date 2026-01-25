@@ -75,6 +75,10 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 									primary: "#E8EAED", // 柔らかい白
 									secondary: "#9AA0A6",
 								},
+								icon: {
+									active: "#f38f60",
+									inactive: "#E8EAED",
+								},
 							}),
 				},
 			}),
