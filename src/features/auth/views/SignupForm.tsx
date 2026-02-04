@@ -1,17 +1,20 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { serverTimestamp } from "firebase/firestore";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import TextField from '@mui/material/TextField';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import TextField from "@mui/material/TextField";
 
-import { auth } from '../../../providers/firebase';
-import { AuthTypo } from '../../../styles/AuthTypo';
-import { validateEmail, validatePassword } from '../composable/formFunc';
+import { auth } from "../../../providers/firebase";
+import { AuthTypo } from "../../../styles/AuthTypo";
+import { createUserData } from "../composable/authFunc";
+import { validateEmail, validatePassword } from "../composable/formFunc";
 
+import type { AppUser } from "../../../types/types";
 export const SignupForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState<string>("");
@@ -29,7 +32,20 @@ export const SignupForm = () => {
 	};
 	const signUpWithEmail = async () => {
 		try {
-			await createUserWithEmailAndPassword(auth, email, password);
+			const userCredential = await createUserWithEmailAndPassword(
+				auth,
+				email,
+				password,
+			);
+			const user = userCredential.user;
+			const userData: AppUser = {
+				uid: user.uid,
+				displayName: null,
+				email: user.email,
+				createdAt: serverTimestamp(),
+			};
+
+			createUserData(userData);
 			setSubmitErr(null);
 			navi("/calendar");
 		} catch (error: unknown) {
