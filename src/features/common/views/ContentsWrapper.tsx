@@ -34,6 +34,10 @@ export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 				sx={{
 					flexGrow: 1,
 					overflow: "auto",
+					display: "flex",
+					justifyContent: "center",
+					maxWidth: "1000px",
+					minWidth: "300px",
 					pt: 6,
 					pb: 8,
 				}}
