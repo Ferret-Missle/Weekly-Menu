@@ -1,5 +1,4 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +10,8 @@ import TextField from "@mui/material/TextField";
 
 import { auth } from "../../../providers/firebase";
 import { AuthTypo } from "../../../styles/AuthTypo";
-import { createUserData } from "../composable/authFunc";
-import { validateEmail, validatePassword } from "../composable/formFunc";
+import { createUserData } from "../composable/createUserData";
+import { validateEmail, validatePassword } from "../composable/validateData";
 
 import type { AppUser } from "../../../types/types";
 export const SignupForm = () => {
@@ -42,7 +41,11 @@ export const SignupForm = () => {
 				uid: user.uid,
 				displayName: null,
 				email: user.email,
-				createdAt: serverTimestamp(),
+				themeMode: "light",
+				groupId: null,
+				groupRole: null,
+				canMemberEditPlan: false,
+				isRecipeShared: false,
 			};
 
 			createUserData(userData);

@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 
 import { auth } from '../../../providers/firebase';
 import { AuthTypo } from '../../../styles/AuthTypo';
-import { validateEmail, validatePassword } from '../composable/formFunc';
+import { validateEmail, validatePassword } from "../composable/validateData";
 
 export const SigninForm = () => {
 	const [email, setEmail] = useState("");
