@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 
 import { contentsMode } from "../../../contexts/ContentsModeContext";
-import { ContentsTypography } from "../../../styles/CalendarTypo";
+import { CalendarTypography } from "../../../styles/CalendarTypo";
 import { showHeaderTitle } from "../composable/showHeaderTitle";
 import { SignoutButton } from "./SignoutButton";
 import { ThemeSwitch } from "./ThemeSwitch";
@@ -43,13 +43,14 @@ export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 			>
 				<Box
 					sx={(theme) => ({
-						p: 2,
 						[theme.breakpoints.up("xs")]: { width: "100%" },
 						[theme.breakpoints.up("sm")]: { width: "80%" },
 						[theme.breakpoints.up("lg")]: { width: "50%" },
 					})}
 				>
-					{children}
+					<Stack spacing={2} direction={"column"} sx={{ p: 2 }}>
+						{children}
+					</Stack>
 				</Box>
 			</Box>
 			<ContentsNavigator />
@@ -70,9 +71,9 @@ const ContentsHeader = () => {
 			}}
 		>
 			<Toolbar variant="dense">
-				<ContentsTypography role="header" sx={{ flexGrow: 1 }}>
+				<CalendarTypography role="header" sx={{ flexGrow: 1 }}>
 					{showHeaderTitle(mode)}
-				</ContentsTypography>
+				</CalendarTypography>
 				<ThemeSwitch />
 				<SignoutButton />
 			</Toolbar>
@@ -141,12 +142,12 @@ const ButtonWrapper = ({
 				}}
 			>
 				{children}
-				<ContentsTypography
+				<CalendarTypography
 					role="sub"
 					sx={{ color: mode === caption ? "icon.active" : "icon.inactive" }}
 				>
 					{buttonCaption}
-				</ContentsTypography>
+				</CalendarTypography>
 			</Stack>
 		</Button>
 	);
