@@ -25,6 +25,7 @@ export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 			sx={{
 				display: "flex",
 				flexDirection: "column",
+				minWidth: "100vw",
 				minHeight: "100vh",
 			}}
 		>
@@ -36,13 +37,20 @@ export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 					overflow: "auto",
 					display: "flex",
 					justifyContent: "center",
-					maxWidth: "1000px",
-					minWidth: "300px",
 					pt: 6,
 					pb: 8,
 				}}
 			>
-				<Box sx={{ p: 2 }}>{children}</Box>
+				<Box
+					sx={(theme) => ({
+						p: 2,
+						[theme.breakpoints.up("xs")]: { width: "100%" },
+						[theme.breakpoints.up("sm")]: { width: "80%" },
+						[theme.breakpoints.up("lg")]: { width: "50%" },
+					})}
+				>
+					{children}
+				</Box>
 			</Box>
 			<ContentsNavigator />
 		</Box>
