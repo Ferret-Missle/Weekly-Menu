@@ -1,5 +1,6 @@
 import type { TypographyProps } from "@mui/material";
 import type { User } from "firebase/auth";
+import type { Timestamp } from "firebase/firestore";
 
 //AppData
 export type AppUser = {
@@ -22,10 +23,10 @@ export type group = {
 export type WeeklyPlan = {
 	authorId: string;
 	schedule: {
-		[data: string]: {
-			breakfast?: { redipeId: string; servings: number };
-			lunch?: { redipeId: string; servings: number };
-			dinner?: { redipeId: string; servings: number };
+		[date: string]: {
+			breakfast?: { recipeId: string; servings: number };
+			lunch?: { recipeId: string; servings: number };
+			dinner?: { recipeId: string; servings: number };
 		};
 	};
 };
@@ -36,6 +37,8 @@ export type Recipe = {
 	thumbnailUrl: string | null;
 	ingredients: string[] | null;
 	steps: string[] | null;
+	createdAt: Timestamp;
+	updatedAt: Timestamp;
 };
 
 //Auth
