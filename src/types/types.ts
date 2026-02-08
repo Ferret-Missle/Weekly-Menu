@@ -13,6 +13,12 @@ export type AppUser = {
 	canMemberEditPlan: boolean;
 	isRecipeShared: boolean;
 };
+export type group = {
+	id: string;
+	name: string;
+	ownerId: string;
+	memberIds: string[];
+};
 export type WeeklyPlan = {
 	authorId: string;
 	schedule: {
@@ -27,9 +33,9 @@ export type Recipe = {
 	id: string;
 	authorId: string;
 	title: string;
-	thumbnailUrl: string;
-	ingredients: string[];
-	steps: string[];
+	thumbnailUrl: string | null;
+	ingredients: string[] | null;
+	steps: string[] | null;
 };
 
 //Auth
