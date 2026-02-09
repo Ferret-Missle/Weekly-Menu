@@ -28,6 +28,8 @@ const ButtonWrapper = ({ children }: { children: ReactNode }) => {
 				border: "1px solid",
 				borderColor: "darkgray",
 				borderRadius: 2,
+				backgroundColor: "background.paper",
+				color: "text.primary",
 				"@media (hover: hover)": {
 					"&:hover": {
 						backgroundColor: "icon.hoverBgcolor",

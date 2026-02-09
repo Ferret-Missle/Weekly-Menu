@@ -59,7 +59,7 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 								icon: {
 									active: "#f38f60",
 									inactive: "#202124",
-									hoverBgcolor: "#f38f60",
+									hoverBgcolor: "#fab595",
 									hoverColor: "#FFFFFF",
 								},
 							}
@@ -80,7 +80,7 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 								icon: {
 									active: "#f38f60",
 									inactive: "#E8EAED",
-									hoverBgcolor: "#f38f60",
+									hoverBgcolor: "#fab595",
 									hoverColor: "#FFFFFF",
 								},
 							}),
