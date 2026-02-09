@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -14,6 +14,8 @@ import { Calendar } from "./features/calendar/Calendar";
 import { ModeThemeProvider } from "./providers/theme";
 
 import type { ContentsModeType } from "./types/types";
+import { Recipe } from "./features/recipe/Recipe";
+import { PurchaseList } from "./features/purchase_list/PurchaseList";
 const App = () => {
 	useAuthStateListener();
 
@@ -27,6 +29,22 @@ const App = () => {
 						element={
 							<AuthGuard mode="calendar">
 								<Calendar />
+							</AuthGuard>
+						}
+					/>
+					<Route
+						path="/recipe"
+						element={
+							<AuthGuard mode="recipe">
+								<Recipe />
+							</AuthGuard>
+						}
+					/>
+					<Route
+						path="/list"
+						element={
+							<AuthGuard mode="list">
+								<PurchaseList />
 							</AuthGuard>
 						}
 					/>
@@ -44,10 +62,10 @@ const AuthGuard = ({
 	mode: ContentsModeType;
 }) => {
 	const user = useAtomValue(firebaseUser);
-	const navi = useNavigate();
 	const setContentsMode = useSetAtom(contentsMode);
 
 	if (user === undefined) {
+		//ログイン状態未確定時
 		setContentsMode(null);
 		return (
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -55,8 +73,8 @@ const AuthGuard = ({
 			</Box>
 		);
 	} else if (user === null) {
-		setContentsMode(null);
-		navi("/");
+		//未ログイン時
+		return <Navigate to="/" />;
 	} else {
 		setContentsMode(mode);
 		return children;

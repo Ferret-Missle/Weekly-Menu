@@ -17,6 +17,7 @@ import { ThemeSwitch } from "./ThemeSwitch";
 
 import type { ReactNode } from "react";
 import type { ContentsModeType } from "../../../types/types";
+import { useNavigate } from "react-router-dom";
 export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
@@ -121,6 +122,7 @@ const ButtonWrapper = ({
 	children: ReactNode;
 	caption: ContentsModeType;
 }) => {
+	const navigate = useNavigate();
 	const [mode, setMode] = useAtom(contentsMode);
 	let buttonCaption = "";
 	if (caption === "calendar") {
@@ -132,7 +134,13 @@ const ButtonWrapper = ({
 	}
 
 	return (
-		<Button sx={{ width: "100%" }} onClick={() => setMode(caption)}>
+		<Button
+			sx={{ width: "100%" }}
+			onClick={() => {
+				setMode(caption);
+				navigate(`/${caption}`);
+			}}
+		>
 			<Stack
 				direction="column"
 				spacing={0.5}
@@ -152,3 +160,4 @@ const ButtonWrapper = ({
 		</Button>
 	);
 };
+
