@@ -97,7 +97,12 @@ export const SignupForm = () => {
 				}}
 			/>
 			<FormControlLabel
-				control={<Checkbox onChange={() => setAgree(!agree)} />}
+				control={
+					<Checkbox
+						onChange={() => setAgree(!agree)}
+						sx={{ "&.Mui-checked": { color: "icon.active" } }}
+					/>
+				}
 				label={
 					<AuthTypo role="text">
 						利用規約とプライバシーポリシーに同意する
@@ -110,7 +115,18 @@ export const SignupForm = () => {
 				fullWidth
 				type="submit"
 				disabled={!email || !password || !agree}
-				sx={{ mt: 2, borderRadius: 2 }}
+				sx={{
+					mt: 2,
+					borderRadius: 2,
+					backgroundColor: "icon.active",
+					color: "white",
+					"@media (hover: hover)": {
+						"&:hover": {
+							backgroundColor: "icon.hoverBgcolor",
+							color: "icon.hoverColor",
+						},
+					},
+				}}
 			>
 				新規登録
 			</Button>

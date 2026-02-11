@@ -40,6 +40,9 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 					},
 				},
 				palette: {
+					primary: {
+						main: "#FF7043",
+					},
 					mode,
 					...(mode === "light"
 						? {
@@ -57,9 +60,9 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 									secondary: "#5F6368",
 								},
 								icon: {
-									active: "#f38f60",
+									active: "#FF7043",
 									inactive: "#202124",
-									hoverBgcolor: "#fab595",
+									hoverBgcolor: "#F4511E",
 									hoverColor: "#FFFFFF",
 								},
 							}
@@ -78,12 +81,27 @@ export const ModeThemeProvider: React.FC<{ children: ReactNode }> = ({
 									secondary: "#9AA0A6",
 								},
 								icon: {
-									active: "#f38f60",
+									active: "#FF7043",
 									inactive: "#E8EAED",
-									hoverBgcolor: "#fab595",
+									hoverBgcolor: "#F4511E",
 									hoverColor: "#FFFFFF",
 								},
 							}),
+				},
+				components: {
+					MuiOutlinedInput: {
+						styleOverrides: {
+							root: {
+								backgroundColor: "#FFF5F2", // 通常時の背景
+								"& input:-webkit-autofill": {
+									// オートコンプリート時の背景色と文字色を強制指定
+									WebkitBoxShadow: "0 0 0 100px #FFFFFF inset", // 背景色の上書き
+									WebkitTextFillColor: "#000", // 文字色の固定
+									borderRadius: "inherit", // 枠の角を合わせる
+								},
+							},
+						},
+					},
 				},
 			}),
 		[mode],
