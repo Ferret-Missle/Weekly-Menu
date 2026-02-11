@@ -90,7 +90,18 @@ export const SigninForm = () => {
 				fullWidth
 				type="submit"
 				disabled={!email || !password}
-				sx={{ mt: 2, borderRadius: 2 }}
+				sx={{
+					mt: 2,
+					borderRadius: 2,
+					backgroundColor: "icon.active",
+					color: "white",
+					"@media (hover: hover)": {
+						"&:hover": {
+							backgroundColor: "icon.hoverBgcolor",
+							color: "icon.hoverColor",
+						},
+					},
+				}}
 			>
 				ログイン
 			</Button>
