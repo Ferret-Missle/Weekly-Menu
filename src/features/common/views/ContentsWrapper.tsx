@@ -19,6 +19,7 @@ import type { ReactNode } from "react";
 import type { ContentsModeType } from "../../../types/types";
 import { useNavigate } from "react-router-dom";
 import { GroupSettingButton } from "./GroupSettingButton";
+import { DeveloperTools } from "../../../test/createTestData";
 export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
@@ -76,6 +77,7 @@ const ContentsHeader = () => {
 				<CalendarTypography role="header" sx={{ flexGrow: 1 }}>
 					{showHeaderTitle(mode)}
 				</CalendarTypography>
+				<DeveloperTools />
 				<GroupSettingButton />
 				<ThemeSwitch />
 				<SignoutButton />
