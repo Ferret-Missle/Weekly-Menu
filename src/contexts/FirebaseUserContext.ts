@@ -1,10 +1,11 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { atom, useSetAtom } from 'jotai';
-import { useEffect } from 'react';
+import { atom, useSetAtom } from "jotai";
+import { useEffect } from "react";
 
-import { auth } from '../providers/firebase';
+import { auth } from "../providers/firebase";
 
 import type { FirebaseUserType } from "../types/types";
+import { useAppSync } from "../features/auth/composable/useAppSync";
 
 export const firebaseUser = atom<FirebaseUserType>(undefined);
 export const useAuthStateListener = () => {
@@ -20,4 +21,6 @@ export const useAuthStateListener = () => {
 		});
 		return unsubscribe;
 	}, [setUser]);
+
+	useAppSync();
 };
