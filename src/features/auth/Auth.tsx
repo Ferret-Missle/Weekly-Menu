@@ -13,6 +13,7 @@ import { SigninForm } from "./views/SigninForm";
 import { SignupForm } from "./views/SignupForm";
 
 import type { AuthMode } from "../../types/types";
+
 export const Auth = () => {
 	const user = useAtomValue(firebaseUser);
 	const [mode, setMode] = useState<AuthMode>("signin");

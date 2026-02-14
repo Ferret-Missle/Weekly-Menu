@@ -14,6 +14,7 @@ import { Calendar } from "./features/calendar/Calendar";
 import { ModeThemeProvider } from "./providers/theme";
 
 import type { ContentsModeType } from "./types/types";
+
 const App = () => {
 	useAuthStateListener();
 
