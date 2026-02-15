@@ -31,7 +31,7 @@ export const useAppSync = () => {
 			}
 		});
 		return () => unsubscribeMe();
-	}, [user]);
+	}, [user, setMe]);
 
 	//グループ情報の取得
 	useEffect(() => {

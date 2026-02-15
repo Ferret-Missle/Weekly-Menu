@@ -16,6 +16,7 @@ import { ModeThemeProvider } from "./providers/theme";
 import type { ContentsModeType } from "./types/types";
 import { Recipe } from "./features/recipe/Recipe";
 import { PurchaseList } from "./features/purchase_list/PurchaseList";
+
 const App = () => {
 	useAuthStateListener();
 
