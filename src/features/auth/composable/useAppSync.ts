@@ -23,7 +23,7 @@ export const useAppSync = () => {
 		const unsubscribeMe = onSnapshot(doc(db, "users", user!.uid), (snap) => {
 			if (snap.exists()) {
 				setMe(snap.data() as AppUser);
-				setTheme(snap.data()?.theme || "light");
+				setTheme(snap.data()?.themeMode || "light");
 				console.log("get my Info: ", snap.data());
 			}
 		});

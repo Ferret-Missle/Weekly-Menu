@@ -7,8 +7,8 @@ import { auth } from "../../../providers/firebase";
 
 export const SignoutButton = () => {
 	return (
-		<IconButton sx={{ fontSize: "24px" }} onClick={() => signOut(auth)}>
-			<LogoutOutlinedIcon />
+		<IconButton onClick={() => signOut(auth)}>
+			<LogoutOutlinedIcon sx={{ fontSize: "32px" }} />
 		</IconButton>
 	);
 };
