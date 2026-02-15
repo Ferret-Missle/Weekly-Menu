@@ -7,31 +7,27 @@ import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../providers/firebase";
 import type { AppUser, group, Recipe } from "../../../types/types";
 import { firebaseUser } from "../../../contexts/FirebaseUserContext";
+import { themeMode } from "../../../contexts/themeContext";
 
 export const useAppSync = () => {
+	const user = useAtomValue(firebaseUser);
 	const [me, setMe] = useAtom(myInfo);
 	const [group, setGroup] = useAtom(groupInfo);
 	const setOwner = useSetAtom(ownerInfo);
 	const setRecipes = useSetAtom(recipeContext);
-	const user = useAtomValue(firebaseUser);
-
-	console.log("useAppSync called:", user?.uid);
+	const setTheme = useSetAtom(themeMode);
 
 	//ユーザ情報の取得
 	useEffect(() => {
-		console.log("  start user exists check");
 		if (!user) return; //未ログインならスキップ
-		console.log("    pass user exists check");
 		const unsubscribeMe = onSnapshot(doc(db, "users", user!.uid), (snap) => {
-			console.log("  start snap exists check");
 			if (snap.exists()) {
-				console.log("    pass snap exists check");
 				setMe(snap.data() as AppUser);
-				console.log("get myInfo: ", snap.data());
+				setTheme(snap.data()?.theme || "light");
 			}
 		});
 		return () => unsubscribeMe();
-	}, [user, setMe]);
+	}, [user, setMe, setTheme]);
 
 	//グループ情報の取得
 	useEffect(() => {

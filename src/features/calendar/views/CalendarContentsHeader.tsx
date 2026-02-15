@@ -14,6 +14,7 @@ export const CalendarContentsHeader = () => {
 					value={plan}
 					onChange={(e) => setPlan(e.target.value)}
 					sx={{
+						borderRadius: 2,
 						color: "text.primary",
 						backgroundColor: "background.default",
 						"&:after": { borderBottomColor: "#FF7043" },
