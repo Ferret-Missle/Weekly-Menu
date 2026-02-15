@@ -24,6 +24,7 @@ export const useAppSync = () => {
 			if (snap.exists()) {
 				setMe(snap.data() as AppUser);
 				setTheme(snap.data()?.theme || "light");
+				console.log("get my Info: ", snap.data());
 			}
 		});
 		return () => unsubscribeMe();
@@ -43,7 +44,7 @@ export const useAppSync = () => {
 			(snap) => {
 				if (snap.exists()) {
 					setGroup(snap.data() as group);
-					console.log("get group Info: ", snap.data());
+					console.log("	got group Info: ", snap.data());
 				}
 			},
 		);
@@ -54,7 +55,7 @@ export const useAppSync = () => {
 	useEffect(() => {
 		if (!me) return; //未ログインならスキップ
 		//自分がオーナー、グループ未参加の場合はスキップ
-		if (!me!.groupId || me!.groupRole == "owner") {
+		if (!me!.groupId || me!.groupRole == "owner" || !group) {
 			setOwner(null);
 			return;
 		}

@@ -3,8 +3,11 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import { useState } from "react";
+import { useAtomValue } from "jotai";
+import { myInfo } from "../../../contexts/AppUserContext";
 export const CalendarContentsHeader = () => {
 	const [plan, setPlan] = useState("mine");
+	const user = useAtomValue(myInfo);
 
 	return (
 		<Box sx={{ display: "flex", justifyContent: "flex-start" }}>
@@ -21,7 +24,9 @@ export const CalendarContentsHeader = () => {
 					}}
 				>
 					<MenuItem value="mine">自分のプラン</MenuItem>
-					<MenuItem value="owner">オーナーのプラン</MenuItem>
+					{user?.groupId && user?.groupRole === "member" && (
+						<MenuItem value="owner">オーナーのプラン</MenuItem>
+					)}
 				</Select>
 			</FormControl>
 		</Box>
