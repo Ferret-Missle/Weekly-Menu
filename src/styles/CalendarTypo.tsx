@@ -10,7 +10,7 @@ export const CalendarTypography = ({
 }: ContentsTypoType) => {
 	const roleStyles = {
 		header: { color: "text.primary", fontWeight: "bold", fontSize: 18 },
-		main: { color: "text.primary", fontWeight: "thin", fontSize: 14 },
+		main: { color: "text.primary", fontWeight: "bold", fontSize: 14 },
 		sub: { color: "text.primary", fontWeight: "thin", fontSize: 12 },
 		period: { color: "text.secondary", fontWeight: "thin", fontSize: 14 },
 		cardtitle: { color: "text.primary", fontWeight: "bold", fontSize: 18 },

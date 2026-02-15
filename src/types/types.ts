@@ -63,3 +63,4 @@ export type ContentsTypoType = TypographyProps & {
 		| "subcol"
 		| "caption";
 };
+export type mealType = "morning" | "lunch" | "dinner";
