@@ -29,8 +29,8 @@ export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 			sx={{
 				display: "flex",
 				flexDirection: "column",
-				minWidth: "100vw",
-				minHeight: "100vh",
+				minWidth: "100%",
+				minHeight: "100%",
 			}}
 		>
 			<ContentsHeader />
