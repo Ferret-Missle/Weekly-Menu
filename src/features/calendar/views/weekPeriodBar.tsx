@@ -2,20 +2,30 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { CalendarTypography } from "../../../styles/CalendarTypo";
 import Button from "@mui/material/Button";
+import { useAtom, useSetAtom } from "jotai";
+import { dispDate } from "../../../contexts/date";
+import { getPeriodString, isDisabled } from "../composable/showDateString";
 export const WeekPeriodBar = () => {
+	const [date, setDate] = useAtom(dispDate);
+	useEffect(() => {
+		setDate(new Date()); //とりあえず今日の日付を入れる
+	}, [setDate]);
+
 	return (
 		<>
 			<Box display="flex" alignItems="center">
-				<ButtonWrapper>
+				<ButtonWrapper direction="prev">
 					<ArrowBackIosNewIcon fontSize="small" />
 				</ButtonWrapper>
 				<Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
-					<CalendarTypography role="period">2026/2/2 - 2/8</CalendarTypography>
+					<CalendarTypography role="period">
+						{getPeriodString(date)}
+					</CalendarTypography>
 				</Box>
-				<ButtonWrapper>
+				<ButtonWrapper direction="next">
 					<ArrowForwardIosIcon fontSize="small" />
 				</ButtonWrapper>
 			</Box>
@@ -27,10 +37,18 @@ export const WeekPeriodBar = () => {
 };
 
 const ThisweekButton = () => {
+	const [date, setDate] = useAtom(dispDate);
+	const handleClick = () => {
+		const today = new Date();
+		setDate(today);
+	};
+
 	return (
 		<>
 			<Button
 				variant="contained"
+				onClick={handleClick}
+				disabled={isDisabled(date)}
 				sx={{
 					mx: "auto",
 					borderRadius: 2,
@@ -52,9 +70,26 @@ const ThisweekButton = () => {
 	);
 };
 
-const ButtonWrapper = ({ children }: { children: ReactNode }) => {
+const ButtonWrapper = ({
+	children,
+	direction,
+}: {
+	children: ReactNode;
+	direction: "prev" | "next";
+}) => {
+	const setDate = useSetAtom(dispDate);
+	const handleClick = () => {
+		setDate((prev) => {
+			const nextDate = new Date(prev);
+			const diff = direction === "next" ? 7 : -7;
+			nextDate.setDate(prev.getDate() + diff);
+			return nextDate;
+		});
+	};
+
 	return (
 		<IconButton
+			onClick={handleClick}
 			sx={{
 				border: "1px solid",
 				borderColor: "darkgray",
