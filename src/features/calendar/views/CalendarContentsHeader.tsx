@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { myInfo } from "../../../contexts/AppUserContext";
+import { CalendarTypography } from "../../../styles/CalendarTypo";
 export const CalendarContentsHeader = () => {
 	const [plan, setPlan] = useState("mine");
 	const user = useAtomValue(myInfo);
@@ -23,9 +24,15 @@ export const CalendarContentsHeader = () => {
 						"&:after": { borderBottomColor: "#FF7043" },
 					}}
 				>
-					<MenuItem value="mine">自分のプラン</MenuItem>
+					<MenuItem value="mine">
+						<CalendarTypography role="plantab">自分のプラン</CalendarTypography>
+					</MenuItem>
 					{user?.groupId && user?.groupRole === "member" && (
-						<MenuItem value="owner">オーナーのプラン</MenuItem>
+						<MenuItem value="owner">
+							<CalendarTypography role="plantab">
+								オーナーのプラン
+							</CalendarTypography>
+						</MenuItem>
 					)}
 				</Select>
 			</FormControl>

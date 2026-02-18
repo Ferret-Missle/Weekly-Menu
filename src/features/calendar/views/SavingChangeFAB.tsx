@@ -1,5 +1,6 @@
 import Fab from "@mui/material/Fab";
 import SaveIcon from "@mui/icons-material/Save";
+import { CalendarTypography } from "../../../styles/CalendarTypo";
 export const SavingChangeFAB = () => {
 	return (
 		<Fab
@@ -23,7 +24,7 @@ export const SavingChangeFAB = () => {
 			}}
 		>
 			<SaveIcon sx={{ mr: 1 }} />
-			保存
+			<CalendarTypography role="button">保存</CalendarTypography>
 		</Fab>
 	);
 };

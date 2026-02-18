@@ -55,12 +55,15 @@ export type ContentsTypoType = TypographyProps & {
 	//カレンダー画面の文字種別
 	role:
 		| "header"
-		| "main"
-		| "sub"
+		| "footer"
 		| "period"
+		| "plantab"
+		| "recipetab"
+		| "servingtab"
+		| "button"
 		| "cardtitle"
-		| "maincol"
-		| "subcol"
-		| "caption";
+		| "cardsection"
+		| "cardcaption"
+		| "cardcallory";
 };
 export type mealType = "morning" | "lunch" | "dinner";

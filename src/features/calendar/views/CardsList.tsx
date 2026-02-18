@@ -25,7 +25,7 @@ const DayCard = ({ date }: { date: string }) => {
 };
 const RecipeSelector = ({ type }: { type: mealType }) => {
 	return (
-		<CalendarTypography role="main" sx={{ mb: 4 }}>
+		<CalendarTypography role="cardsection" sx={{ mb: 4 }}>
 			{showMealType(type)}
 		</CalendarTypography>
 	);

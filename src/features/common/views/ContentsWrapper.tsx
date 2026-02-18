@@ -156,7 +156,7 @@ const ButtonWrapper = ({
 			>
 				{children}
 				<CalendarTypography
-					role="sub"
+					role="footer"
 					sx={{ color: mode === caption ? "icon.active" : "icon.inactive" }}
 				>
 					{buttonCaption}

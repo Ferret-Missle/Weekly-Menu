@@ -20,26 +20,34 @@ export const WeekPeriodBar = () => {
 				</ButtonWrapper>
 			</Box>
 			<Box display="flex" alignItems="center">
-				<Button
-					variant="contained"
-					sx={{
-						mx: "auto",
-						borderRadius: 2,
-						boxShadow: 3,
-						backgroundColor: "icon.active",
-						color: "white",
-						"@media (hover: hover)": {
-							"&:hover": {
-								backgroundColor: "icon.hoverBgcolor",
-								color: "icon.hoverColor",
-							},
-						},
-						"&:active": { transform: "scale(0.95)" },
-					}}
-				>
-					今週へ移動
-				</Button>
+				<ThisweekButton />
 			</Box>
+		</>
+	);
+};
+
+const ThisweekButton = () => {
+	return (
+		<>
+			<Button
+				variant="contained"
+				sx={{
+					mx: "auto",
+					borderRadius: 2,
+					boxShadow: 3,
+					backgroundColor: "icon.active",
+					color: "white",
+					"@media (hover: hover)": {
+						"&:hover": {
+							backgroundColor: "icon.hoverBgcolor",
+							color: "icon.hoverColor",
+						},
+					},
+					"&:active": { transform: "scale(0.95)" },
+				}}
+			>
+				<CalendarTypography role="button">今週へ移動</CalendarTypography>
+			</Button>
 		</>
 	);
 };

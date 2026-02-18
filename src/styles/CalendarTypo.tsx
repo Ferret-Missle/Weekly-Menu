@@ -9,14 +9,17 @@ export const CalendarTypography = ({
 	...props
 }: ContentsTypoType) => {
 	const roleStyles = {
-		header: { color: "text.primary", fontWeight: "bold", fontSize: 18 },
-		main: { color: "text.primary", fontWeight: "bold", fontSize: 14 },
-		sub: { color: "text.primary", fontWeight: "thin", fontSize: 12 },
-		period: { color: "text.secondary", fontWeight: "thin", fontSize: 14 },
-		cardtitle: { color: "text.primary", fontWeight: "bold", fontSize: 18 },
-		maincol: { color: "text.primary", fontWeight: "bold", fontSize: 30 },
-		subcol: { color: "text.primary", fontWeight: "bold", fontSize: 18 },
-		caption: { color: "text.secondary", fontWeight: "thin", fontSize: 14 },
+		header: { color: "text.primary", fontWeight: "600", fontSize: 20 },
+		footer: { color: "text.primary", fontWeight: "400", fontSize: 12 },
+		plantab: { color: "text.primary", fontWeight: "400", fontSize: 14 },
+		period: { color: "text.secondary", fontWeight: "400", fontSize: 16 },
+		button: { color: "white", fontWeight: "400", fontSize: 16 },
+		cardtitle: { color: "text.primary", fontWeight: "600", fontSize: 20 },
+		cardsection: { color: "text.primary", fontWeight: "500", fontSize: 14 },
+		recipetab: { color: "text.primary", fontWeight: "600", fontSize: 14 },
+		servingtab: { color: "text.primary", fontWeight: "600", fontSize: 14 },
+		cardcaption: { color: "text.primary", fontWeight: "400", fontSize: 14 },
+		cardcallory: { color: "text.primary", fontWeight: "700", fontSize: 18 },
 	};
 	const style = role ? roleStyles[role] : {};
 
