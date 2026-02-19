@@ -69,7 +69,14 @@ const AuthGuard = ({
 		//ログイン状態未確定時
 		setContentsMode(null);
 		return (
-			<Box sx={{ display: "flex", justifyContent: "center" }}>
+			<Box
+				sx={{
+					display: "flex",
+					justifyContent: "center",
+					width: "100%",
+					height: "100%",
+				}}
+			>
 				<CircularProgress />
 			</Box>
 		);

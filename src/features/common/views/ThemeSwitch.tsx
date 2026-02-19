@@ -14,9 +14,21 @@ export const ThemeSwitch = () => {
 	return (
 		<IconButton onClick={toggleTheme}>
 			{mode === "light" ? (
-				<Brightness4OutlinedIcon sx={{ fontSize: "32px" }} />
+				<Brightness4OutlinedIcon
+					sx={(theme) => ({
+						[theme.breakpoints.up("xs")]: { fontSize: "32px" },
+						[theme.breakpoints.up("sm")]: { fontSize: "28px" },
+						[theme.breakpoints.up("lg")]: { fontSize: "24px" },
+					})}
+				/>
 			) : (
-				<Brightness7OutlinedIcon sx={{ fontSize: "32px" }} />
+				<Brightness7OutlinedIcon
+					sx={(theme) => ({
+						[theme.breakpoints.up("xs")]: { fontSize: "32px" },
+						[theme.breakpoints.up("sm")]: { fontSize: "28px" },
+						[theme.breakpoints.up("lg")]: { fontSize: "24px" },
+					})}
+				/>
 			)}
 		</IconButton>
 	);
