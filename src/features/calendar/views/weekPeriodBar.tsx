@@ -51,14 +51,14 @@ const ThisweekButton = () => {
 				disabled={isDisabled(date)}
 				sx={{
 					mx: "auto",
-					borderRadius: 2,
-					boxShadow: 3,
+					px: 3,
+					py: 1,
+					boxShadow: 4,
+					borderRadius: 3,
 					backgroundColor: "icon.active",
-					color: "white",
 					"@media (hover: hover)": {
 						"&:hover": {
 							backgroundColor: "icon.hoverBgcolor",
-							color: "icon.hoverColor",
 						},
 					},
 					"&:active": { transform: "scale(0.95)" },

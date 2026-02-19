@@ -10,17 +10,20 @@ export const SavingChangeFAB = () => {
 				position: "fixed",
 				bottom: 74,
 				right: { xs: 24, md: 32 },
+				boxShadow: 4,
 				borderRadius: 3,
-				boxShadow: 3,
 				backgroundColor: "icon.active",
 				color: "white",
+				"&.Mui-disabled": {
+					color: "red",
+				},
 				"@media (hover: hover)": {
 					"&:hover": {
 						backgroundColor: "icon.hoverBgcolor",
 						color: "icon.hoverColor",
 					},
 				},
-				"&:active": { transform: "scale(0.95)" }, // フィードバックを強調
+				"&:active": { transform: "scale(0.95)" },
 			}}
 		>
 			<SaveIcon sx={{ mr: 1 }} />
