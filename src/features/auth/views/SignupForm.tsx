@@ -39,6 +39,7 @@ export const SignupForm = () => {
 			const user = userCredential.user;
 			const userData: AppUser = {
 				uid: user.uid,
+				displayPlan: "user",
 				displayName: null,
 				email: user.email,
 				themeMode: "light",

@@ -2,7 +2,7 @@ import type { mealType } from "../../../types/types";
 
 export function showMealType(type: mealType) {
 	switch (type) {
-		case "morning":
+		case "breakfast":
 			return "朝";
 		case "lunch":
 			return "昼";

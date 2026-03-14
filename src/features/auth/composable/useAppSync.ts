@@ -102,7 +102,7 @@ export const useAppSync = () => {
 
 		const monday = getMonday(date);
 		const planId =
-			me.dispPlan === "owner" && group && group.ownerId
+			me.displayPlan === "owner" && group && group.ownerId
 				? `${group.ownerId}_${monday.toISOString().split("T")[0]}`
 				: `${me.uid}_${monday.toISOString().split("T")[0]}`;
 		const unsubscribe = onSnapshot(doc(db, "weeklyPlans", planId), (snap) => {

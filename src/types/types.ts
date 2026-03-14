@@ -6,12 +6,12 @@ import type { Timestamp } from "firebase/firestore";
 export type AppUser = {
 	//アプリ内ユーザデータ
 	uid: string;
+	displayPlan: "user" | "owner" | null;
 	displayName: string | null;
 	email: string | null;
 	themeMode: "light" | "dark" | null;
 	groupId: string | null;
 	groupRole: "owner" | "member" | null;
-	dispPlan: "user" | "owner" | null;
 	canMemberEditPlan: boolean;
 	isRecipeShared: boolean;
 };
