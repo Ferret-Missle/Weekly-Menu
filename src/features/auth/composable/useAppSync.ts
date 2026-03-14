@@ -10,7 +10,10 @@ import { firebaseUser } from "../../../contexts/FirebaseUserContext";
 import { themeMode } from "../../../contexts/themeContext";
 import { dispDate } from "../../../contexts/date";
 import { planContext } from "../../../contexts/plansContext";
-import { getMonday } from "../../calendar/composable/showDateString";
+import {
+	formatLocalYYYYMMDD,
+	getMonday,
+} from "../../calendar/composable/showDateString";
 
 export const useAppSync = () => {
 	const user = useAtomValue(firebaseUser);
@@ -50,12 +53,13 @@ export const useAppSync = () => {
 			(snap) => {
 				if (snap.exists()) {
 					setGroup(snap.data() as group);
-					console.log("	got group Info: ", snap.data());
+					console.log("get group Info: ", snap.data());
 				}
 			},
 		);
 		return () => unsubscribeGroup();
-	}, [me, setGroup]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [me?.groupId]);
 
 	//オーナー情報の取得
 	useEffect(() => {
@@ -74,7 +78,8 @@ export const useAppSync = () => {
 			},
 		);
 		return () => unsubscribeOwner();
-	}, [me, setOwner, group]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [me?.groupId, me?.groupRole, group?.ownerId]);
 
 	//レシピ一覧の取得
 	useEffect(() => {
@@ -94,7 +99,7 @@ export const useAppSync = () => {
 		return () => {
 			unsubsrcibeRecipes();
 		};
-	}, [me, setRecipes]);
+	}, [me?.groupId]);
 
 	//週間プランの取得
 	useEffect(() => {
@@ -103,16 +108,19 @@ export const useAppSync = () => {
 		const monday = getMonday(date);
 		const planId =
 			me.displayPlan === "owner" && group && group.ownerId
-				? `${group.ownerId}_${monday.toISOString().split("T")[0]}`
-				: `${me.uid}_${monday.toISOString().split("T")[0]}`;
+				? `${group.ownerId}_${formatLocalYYYYMMDD(monday)}`
+				: `${me.uid}_${formatLocalYYYYMMDD(monday)}`;
+		// console.log("planId= ", planId);
 		const unsubscribe = onSnapshot(doc(db, "weeklyPlans", planId), (snap) => {
 			if (snap.exists()) {
 				setPlan({ id: snap.id, ...snap.data() } as WeeklyPlan);
-				console.log("	got weekly Plans: ", snap.data());
+				console.log("get weekly Plans: ", snap.data());
+			} else {
+				setPlan(undefined);
 			}
 		});
 
 		return () => unsubscribe();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [me, date, group]);
+	}, [me?.displayPlan, date, group?.id, group?.ownerId]);
 };

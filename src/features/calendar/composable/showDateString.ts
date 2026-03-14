@@ -27,6 +27,7 @@ export function isDisabled(dateStr: Date) {
 export function getMonday(d: Date) {
 	//月曜日を算出する
 	const target = new Date(d);
+	target.setHours(0, 0, 0, 0); // 時刻をリセット
 	const day = target.getDay();
 	const diff = day === 0 ? -6 : 1 - day; // 日曜なら-6、それ以外は1-day
 	target.setDate(target.getDate() + diff);
@@ -41,4 +42,13 @@ function getMondayComp(d: Date) {
 	const diff = day === 0 ? -6 : 1 - day; // 日曜なら-6、それ以外は1-day
 	target.setDate(target.getDate() + diff);
 	return target.getTime(); // 比較のためにタイムスタンプを返す
+}
+
+export function formatLocalYYYYMMDD(d: Date) {
+	const t = new Date(d);
+	t.setHours(0, 0, 0, 0);
+	const y = t.getFullYear();
+	const m = String(t.getMonth() + 1).padStart(2, "0");
+	const day = String(t.getDate()).padStart(2, "0");
+	return `${y}-${m}-${day}`;
 }

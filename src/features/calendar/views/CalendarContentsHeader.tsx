@@ -6,9 +6,16 @@ import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { myInfo } from "../../../contexts/AppUserContext";
 import { CalendarTypography } from "../../../styles/CalendarTypo";
+import { uploadDisplayPlan } from "../../auth/composable/uploadFirebaseData";
+
 export const CalendarContentsHeader = () => {
-	const [plan, setPlan] = useState("mine");
 	const user = useAtomValue(myInfo);
+	const [plan, setPlan] = useState<string>(user?.displayPlan || "user");
+
+	const handleChangePlan = (planType: string) => {
+		setPlan(planType); //UI表示を変更
+		uploadDisplayPlan(planType, user!.uid); //表示するプランの切替をFirestoreに保存
+	};
 
 	return (
 		<Box sx={{ display: "flex", justifyContent: "flex-start" }}>
@@ -16,7 +23,7 @@ export const CalendarContentsHeader = () => {
 				<Select
 					labelId="plan-select-label"
 					value={plan}
-					onChange={(e) => setPlan(e.target.value)}
+					onChange={(e) => handleChangePlan(e.target.value)}
 					sx={{
 						borderRadius: 2,
 						color: "text.primary",
@@ -24,7 +31,7 @@ export const CalendarContentsHeader = () => {
 						"&:after": { borderBottomColor: "#FF7043" },
 					}}
 				>
-					<MenuItem value="mine">
+					<MenuItem value="user">
 						<CalendarTypography role="plantab">自分のプラン</CalendarTypography>
 					</MenuItem>
 					{user?.groupId && user?.groupRole === "member" && (

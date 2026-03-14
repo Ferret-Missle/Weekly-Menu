@@ -2,7 +2,11 @@ import Paper from "@mui/material/Paper";
 import { CalendarTypography } from "../../../styles/CalendarTypo";
 import type { mealType } from "../../../types/types";
 import { showMealType } from "../composable/showMealType";
-import { getMonday, showDateString } from "../composable/showDateString";
+import {
+	formatLocalYYYYMMDD,
+	getMonday,
+	showDateString,
+} from "../composable/showDateString";
 import { useAtomValue } from "jotai";
 import { dispDate } from "../../../contexts/date";
 import FormControl from "@mui/material/FormControl";
@@ -11,7 +15,7 @@ import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import { recipeContext } from "../../../contexts/recipesContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { planContext } from "../../../contexts/plansContext";
 
 export const CardsList = () => {
@@ -47,19 +51,25 @@ const DayCard = ({ date }: { date: Date }) => {
 const RecipeSelector = ({ type, date }: { type: mealType; date: Date }) => {
 	const recipes = useAtomValue(recipeContext);
 	const plans = useAtomValue(planContext);
-	console.log("plans= ", plans);
-	console.log("recipes= ", recipes);
+	// console.log("plans= ", plans);
+	// console.log("recipes= ", recipes);
 
 	const initRecipe =
-		plans?.schedule?.[date.toISOString().split("T")[0]]?.[type]?.recipeId;
+		plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.recipeId;
 	const initServings =
-		plans?.schedule?.[date.toISOString().split("T")[0]]?.[type]?.servings;
+		plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.servings;
 
 	const [recipeId, setRecipeId] = useState<string>(initRecipe || "");
 	const [servings, setServings] = useState<number>(initServings || 1);
 
-	console.log("recipeId: ", recipeId);
-	console.log("servings: ", servings);
+	useEffect(() => {
+		const newRecipe =
+			plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.recipeId;
+		const newServings =
+			plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.servings;
+		setRecipeId(newRecipe || "");
+		setServings(newServings || 1);
+	}, [date, plans]);
 
 	return (
 		<>

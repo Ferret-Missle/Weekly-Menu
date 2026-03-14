@@ -16,6 +16,7 @@ import { ModeThemeProvider } from "./providers/theme";
 import type { ContentsModeType } from "./types/types";
 import { Recipe } from "./features/recipe/Recipe";
 import { PurchaseList } from "./features/purchase_list/PurchaseList";
+import { useEffect } from "react";
 
 const App = () => {
 	useAuthStateListener();
@@ -65,26 +66,33 @@ const AuthGuard = ({
 	const user = useAtomValue(firebaseUser);
 	const setContentsMode = useSetAtom(contentsMode);
 
+	useEffect(() => {
+		if (user === undefined) {
+			setContentsMode(null);
+		} else if (user !== null) {
+			setContentsMode(mode);
+		}
+	}, [user, mode, setContentsMode]);
+
 	if (user === undefined) {
 		//ログイン状態未確定時
-		setContentsMode(null);
 		return (
 			<Box
 				sx={{
 					display: "flex",
 					justifyContent: "center",
+					alignItems: "center",
 					width: "100%",
-					height: "100hw",
+					height: "100vh",
 				}}
 			>
-				<CircularProgress />
+				<CircularProgress size="3rem" />
 			</Box>
 		);
 	} else if (user === null) {
 		//未ログイン時
 		return <Navigate to="/" />;
 	} else {
-		setContentsMode(mode);
 		return children;
 	}
 };
