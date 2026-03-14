@@ -5,9 +5,12 @@ import { groupInfo } from "../../../contexts/groupContext";
 import { useEffect } from "react";
 import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../../providers/firebase";
-import type { AppUser, group, Recipe } from "../../../types/types";
+import type { AppUser, group, Recipe, WeeklyPlan } from "../../../types/types";
 import { firebaseUser } from "../../../contexts/FirebaseUserContext";
 import { themeMode } from "../../../contexts/themeContext";
+import { dispDate } from "../../../contexts/date";
+import { planContext } from "../../../contexts/plansContext";
+import { getMonday } from "../../calendar/composable/showDateString";
 
 export const useAppSync = () => {
 	const user = useAtomValue(firebaseUser);
@@ -16,6 +19,9 @@ export const useAppSync = () => {
 	const setOwner = useSetAtom(ownerInfo);
 	const setRecipes = useSetAtom(recipeContext);
 	const setTheme = useSetAtom(themeMode);
+
+	const date = useAtomValue<Date>(dispDate); //表示期間の基準日
+	const setPlan = useSetAtom(planContext);
 
 	//ユーザ情報の取得
 	useEffect(() => {
@@ -73,12 +79,14 @@ export const useAppSync = () => {
 	//レシピ一覧の取得
 	useEffect(() => {
 		if (!me) return; //未ログインならスキップ
+
 		const q = query(
 			collection(db, "recipes"),
 			where("authorId", "==", me!.uid),
 		);
 		const unsubsrcibeRecipes = onSnapshot(q, (snap) => {
 			const list = snap.docs.map((d) => d.data() as Recipe);
+			// const list = snap.docs.map((d) => {id:d.id,...d.data()} as Recipe);
 			setRecipes(list);
 			console.log("get recipes Info: ", list);
 		});
@@ -87,4 +95,24 @@ export const useAppSync = () => {
 			unsubsrcibeRecipes();
 		};
 	}, [me, setRecipes]);
+
+	//週間プランの取得
+	useEffect(() => {
+		if (!me) return;
+
+		const monday = getMonday(date);
+		const planId =
+			me.dispPlan === "owner" && group && group.ownerId
+				? `${group.ownerId}_${monday.toISOString().split("T")[0]}`
+				: `${me.uid}_${monday.toISOString().split("T")[0]}`;
+		const unsubscribe = onSnapshot(doc(db, "weeklyPlans", planId), (snap) => {
+			if (snap.exists()) {
+				setPlan({ id: snap.id, ...snap.data() } as WeeklyPlan);
+				console.log("	got weekly Plans: ", snap.data());
+			}
+		});
+
+		return () => unsubscribe();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [me, date, group]);
 };

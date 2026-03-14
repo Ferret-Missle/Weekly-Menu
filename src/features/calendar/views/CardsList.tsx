@@ -10,6 +10,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import { recipeContext } from "../../../contexts/recipesContext";
+import { useState } from "react";
+import { planContext } from "../../../contexts/plansContext";
+
 export const CardsList = () => {
 	const date = useAtomValue(dispDate);
 
@@ -32,14 +36,31 @@ const DayCard = ({ date }: { date: Date }) => {
 			<CalendarTypography role="cardtitle" sx={{ mb: 4 }}>
 				{showDateString(date)}
 			</CalendarTypography>
-			<RecipeSelector type="morning" />
-			<RecipeSelector type="lunch" />
-			<RecipeSelector type="dinner" />
+			<RecipeSelector type="breakfast" date={date} />
+			<RecipeSelector type="lunch" date={date} />
+			<RecipeSelector type="dinner" date={date} />
 			<Divider />
 		</Paper>
 	);
 };
-const RecipeSelector = ({ type }: { type: mealType }) => {
+
+const RecipeSelector = ({ type, date }: { type: mealType; date: Date }) => {
+	const recipes = useAtomValue(recipeContext);
+	const plans = useAtomValue(planContext);
+	console.log("plans= ", plans);
+	console.log("recipes= ", recipes);
+
+	const initRecipe =
+		plans?.schedule?.[date.toISOString().split("T")[0]]?.[type]?.recipeId;
+	const initServings =
+		plans?.schedule?.[date.toISOString().split("T")[0]]?.[type]?.servings;
+
+	const [recipeId, setRecipeId] = useState<string>(initRecipe || "");
+	const [servings, setServings] = useState<number>(initServings || 1);
+
+	console.log("recipeId: ", recipeId);
+	console.log("servings: ", servings);
+
 	return (
 		<>
 			<CalendarTypography role="cardsection">
@@ -48,6 +69,8 @@ const RecipeSelector = ({ type }: { type: mealType }) => {
 			<Stack spacing={1} direction="row" sx={{ mb: 3 }}>
 				<FormControl size="small" sx={{ flexGrow: 1 }}>
 					<Select
+						value={recipeId}
+						onChange={(e) => setRecipeId(e.target.value)}
 						sx={{
 							borderRadius: 2,
 							color: "text.primary",
@@ -55,12 +78,15 @@ const RecipeSelector = ({ type }: { type: mealType }) => {
 							"&:after": { borderBottomColor: "#FF7043" },
 						}}
 					>
-						<MenuItem>test1</MenuItem>
-						<MenuItem>test2</MenuItem>
+						{recipes.map((recipe) => (
+							<MenuItem value={recipe.id}>{recipe.title}</MenuItem>
+						))}
 					</Select>
 				</FormControl>
 				<FormControl size="small" sx={{ minWidth: "70px", width: "auto" }}>
 					<Select
+						value={servings}
+						onChange={(e) => setServings(e.target.value)}
 						sx={{
 							borderRadius: 2,
 							color: "text.primary",
@@ -68,11 +94,11 @@ const RecipeSelector = ({ type }: { type: mealType }) => {
 							"&:after": { borderBottomColor: "#FF7043" },
 						}}
 					>
-						<MenuItem>1人分</MenuItem>
-						<MenuItem>2人分</MenuItem>
-						<MenuItem>3人分</MenuItem>
-						<MenuItem>4人分</MenuItem>
-						<MenuItem>5人分</MenuItem>
+						<MenuItem value={1}>1人分</MenuItem>
+						<MenuItem value={2}>2人分</MenuItem>
+						<MenuItem value={3}>3人分</MenuItem>
+						<MenuItem value={4}>4人分</MenuItem>
+						<MenuItem value={5}>5人分</MenuItem>
 					</Select>
 				</FormControl>
 			</Stack>

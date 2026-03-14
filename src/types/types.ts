@@ -11,6 +11,7 @@ export type AppUser = {
 	themeMode: "light" | "dark" | null;
 	groupId: string | null;
 	groupRole: "owner" | "member" | null;
+	dispPlan: "user" | "owner" | null;
 	canMemberEditPlan: boolean;
 	isRecipeShared: boolean;
 };
@@ -21,6 +22,7 @@ export type group = {
 	memberIds: string[];
 };
 export type WeeklyPlan = {
+	id: string;
 	authorId: string;
 	schedule: {
 		[date: string]: {
@@ -66,4 +68,4 @@ export type ContentsTypoType = TypographyProps & {
 		| "cardcaption"
 		| "cardcallory";
 };
-export type mealType = "morning" | "lunch" | "dinner";
+export type mealType = "breakfast" | "lunch" | "dinner";

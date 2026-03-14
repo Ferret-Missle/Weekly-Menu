@@ -17,6 +17,7 @@ export const seedTestData = async (userId: string) => {
 
 		const recipeRef = doc(db, "recipes", id);
 		batch.set(recipeRef, {
+			id: id,
 			authorId: userId,
 			title: `テスト用レシピ ${i}`,
 			thumbnailUrl: `https://picsum.photos/seed/${id}/200`,
@@ -27,7 +28,7 @@ export const seedTestData = async (userId: string) => {
 	}
 
 	// 2. 7週間分（49日間）の献立作成
-	const startDate = new Date("2026-02-09"); // 基準日（月曜日）
+	const startDate = new Date("2026-04-05"); // 基準日（月曜日）
 
 	for (let w = 0; w < 7; w++) {
 		const weekStartDate = new Date(startDate);
