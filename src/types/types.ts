@@ -2,6 +2,14 @@ import type { TypographyProps } from "@mui/material";
 import type { User } from "firebase/auth";
 import type { Timestamp } from "firebase/firestore";
 
+//共通型
+export type snackbarType = {
+	open: boolean;
+	msg: string;
+	severity: "success" | "error"|'warning'|'info';
+};
+
+
 //AppData
 export type AppUser = {
 	//アプリ内ユーザデータ
