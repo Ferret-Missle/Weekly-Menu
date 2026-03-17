@@ -5,6 +5,7 @@ import { CalendarContentsHeader } from "./views/CalendarContentsHeader";
 import { CardsList } from "./views/CardsList";
 
 export const Calendar = () => {
+
 	return (
 		<ContentsWrapper>
 			<CalendarContentsHeader />

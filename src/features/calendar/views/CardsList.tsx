@@ -17,6 +17,7 @@ import Divider from "@mui/material/Divider";
 import { recipeContext } from "../../../contexts/recipesContext";
 import { useEffect, useState } from "react";
 import { planContext } from "../../../contexts/plansContext";
+import { useFixPlansContext } from "../composable/useFixPlansContext";
 
 export const CardsList = () => {
 	const date = useAtomValue(dispDate);
@@ -49,27 +50,29 @@ const DayCard = ({ date }: { date: Date }) => {
 };
 
 const RecipeSelector = ({ type, date }: { type: mealType; date: Date }) => {
-	const recipes = useAtomValue(recipeContext);
-	const plans = useAtomValue(planContext);
-	// console.log("plans= ", plans);
-	// console.log("recipes= ", recipes);
-
-	const initRecipe =
-		plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.recipeId;
-	const initServings =
-		plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.servings;
-
-	const [recipeId, setRecipeId] = useState<string>(initRecipe || "");
-	const [servings, setServings] = useState<number>(initServings || 1);
-
+	const recipes = useAtomValue(recipeContext); //レシピ一覧
+	const plans = useAtomValue(planContext); //週間プランデータ
 	useEffect(() => {
+		//plansの変更を監視
 		const newRecipe =
 			plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.recipeId;
 		const newServings =
 			plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.servings;
 		setRecipeId(newRecipe || "");
 		setServings(newServings || 1);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [date, plans]);
+
+	//初期表示値の設定‘
+	const initRecipe =
+		plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.recipeId;
+	const initServings =
+		plans?.schedule?.[formatLocalYYYYMMDD(date)]?.[type]?.servings;
+
+	const [recipeId, setRecipeId] = useState<string>(initRecipe || ""); //選択したレシピステート
+	const [servings, setServings] = useState<number>(initServings || 1); //選択した人数ステート
+
+	const fixPlans = useFixPlansContext(); //plansコンテキスト更新関数
 
 	return (
 		<>
@@ -80,7 +83,10 @@ const RecipeSelector = ({ type, date }: { type: mealType; date: Date }) => {
 				<FormControl size="small" sx={{ flexGrow: 1 }}>
 					<Select
 						value={recipeId}
-						onChange={(e) => setRecipeId(e.target.value)}
+						onChange={(e) => {
+							setRecipeId(e.target.value);
+							fixPlans(date, type, e.target.value, servings);
+						}}
 						sx={{
 							borderRadius: 2,
 							color: "text.primary",
@@ -96,7 +102,10 @@ const RecipeSelector = ({ type, date }: { type: mealType; date: Date }) => {
 				<FormControl size="small" sx={{ minWidth: "70px", width: "auto" }}>
 					<Select
 						value={servings}
-						onChange={(e) => setServings(e.target.value)}
+						onChange={(e) => {
+							setServings(e.target.value);
+							fixPlans(date, type, recipeId, e.target.value);
+						}}
 						sx={{
 							borderRadius: 2,
 							color: "text.primary",
