@@ -94,6 +94,7 @@ const RecipeSelector = ({ type, date }: { type: mealType; date: Date }) => {
 							"&:after": { borderBottomColor: "#FF7043" },
 						}}
 					>
+						<MenuItem value={""}>未選択</MenuItem>
 						{recipes.map((recipe) => (
 							<MenuItem value={recipe.id}>{recipe.title}</MenuItem>
 						))}
