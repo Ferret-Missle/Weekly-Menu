@@ -85,21 +85,32 @@ export const useAppSync = () => {
 	useEffect(() => {
 		if (!me) return; //未ログインならスキップ
 
+		let targetIds: string[] = []; //IDリストを宣言
+		if (group) {
+			//グループに参加している場合
+			targetIds = Array.from(new Set([group.ownerId, ...group.memberIds]));
+		} else {
+			targetIds = [me.uid];
+		}
+
+		if (targetIds.length === 0) return;
+
+		//クエリ発行(最大30件)
 		const q = query(
 			collection(db, "recipes"),
-			where("authorId", "==", me!.uid),
+			where("authorId", "in", targetIds.slice(0, 30)),
 		);
-		const unsubsrcibeRecipes = onSnapshot(q, (snap) => {
-			const list = snap.docs.map((d) => d.data() as Recipe);
-			// const list = snap.docs.map((d) => {id:d.id,...d.data()} as Recipe);
+
+		const unsubscribeRecipes = onSnapshot(q, (snap) => {
+			const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Recipe);
 			setRecipes(list);
-			console.log("get recipes Info: ", list);
+			console.log("Recipes fetched for:", targetIds, list);
 		});
 
 		return () => {
-			unsubsrcibeRecipes();
+			unsubscribeRecipes();
 		};
-	}, [me?.groupId]);
+	}, [me?.groupId, group]);
 
 	//週間プランの取得
 	useEffect(() => {

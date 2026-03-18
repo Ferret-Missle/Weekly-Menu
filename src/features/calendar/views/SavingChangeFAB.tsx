@@ -9,15 +9,19 @@ import { useEffect, useState } from "react";
 import type { snackbarType } from "../../../types/types";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { myInfo, ownerInfo } from "../../../contexts/AppUserContext";
+
 export const SavingChangeFAB = () => {
+	const date = useAtomValue(dispDate);
+	const user = useAtomValue(myInfo); //誰のプランを表示中か
+	const owner = useAtomValue(ownerInfo);
+	const [isDisabled, setIsDisabled] = useAtom(saveButtonFlg);
+	const { saveAll } = usePlansUpload(); //Firestoreにアップロード
 	const [snack, setSnack] = useState<snackbarType>({
 		open: false,
 		msg: "",
 		severity: "success",
 	});
-	const [isDisabled, setIsDisabled] = useAtom(saveButtonFlg);
-	const { saveAll } = usePlansUpload(); //Firestoreにアップロード
-	const date = useAtomValue(dispDate);
 
 	useEffect(() => {
 		//表示日付が変更されたら保存ボタンをDisabled
@@ -25,6 +29,17 @@ export const SavingChangeFAB = () => {
 	}, [date, setIsDisabled]);
 
 	const handleSave = async () => {
+		//ownerのプラン表示中かつOwnerがメンバー編集権限をfalseにしている場合
+		if (user?.displayPlan === "owner" && owner?.canMemberEditPlan === false) {
+			setSnack({
+				open: true,
+				msg: "グループオーナーがメンバーによるプラン編集を許可していません",
+				severity: "error",
+			});
+
+			return;
+		}
+
 		setIsDisabled(false); //保存ボタンを無効化
 		try {
 			await saveAll();
