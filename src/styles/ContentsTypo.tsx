@@ -24,7 +24,11 @@ export const ContentsTypography = ({
 	const style = role ? roleStyles[role] : {};
 
 	return (
-		<Typography {...style} {...props} sx={{ ...style, ...sx }}>
+		<Typography
+			{...style}
+			{...props}
+			sx={{ textTransform: "none", ...style, ...sx }}
+		>
 			{children}
 		</Typography>
 	);
