@@ -30,7 +30,7 @@ const RecipeCard = ({
 	calories: string;
 }) => {
 	return (
-		<Button>
+		<Button sx={{ margin: 0, padding: 0 }}>
 			<Paper sx={{ p: 3, borderRadius: 4, width: "100%" }}>
 				<Stack direction={"row"} spacing={3}>
 					<Skeleton
