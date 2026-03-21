@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 
 import type { ContentsTypoType } from "../types/types";
 
-export const CalendarTypography = ({
+export const ContentsTypography = ({
 	role,
 	children,
 	sx,

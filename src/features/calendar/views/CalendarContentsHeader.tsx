@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai";
 import { myInfo } from "../../../contexts/AppUserContext";
-import { CalendarTypography } from "../../../styles/CalendarTypo";
+import { ContentsTypography } from "../../../styles/ContentsTypo";
 import { uploadDisplayPlan } from "../../auth/composable/uploadFirebaseData";
 
 export const CalendarContentsHeader = () => {
@@ -35,13 +35,13 @@ export const CalendarContentsHeader = () => {
 					}}
 				>
 					<MenuItem value="user">
-						<CalendarTypography role="plantab">自分のプラン</CalendarTypography>
+						<ContentsTypography role="plantab">自分のプラン</ContentsTypography>
 					</MenuItem>
 					{user?.groupId && user?.groupRole === "member" && (
 						<MenuItem value="owner">
-							<CalendarTypography role="plantab">
+							<ContentsTypography role="plantab">
 								オーナーのプラン
-							</CalendarTypography>
+							</ContentsTypography>
 						</MenuItem>
 					)}
 				</Select>

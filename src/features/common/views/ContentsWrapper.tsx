@@ -10,7 +10,6 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 
 import { contentsMode } from "../../../contexts/ContentsModeContext";
-import { CalendarTypography } from "../../../styles/CalendarTypo";
 import { showHeaderTitle } from "../composable/showHeaderTitle";
 import { SignoutButton } from "./SignoutButton";
 import { ThemeSwitch } from "./ThemeSwitch";
@@ -20,6 +19,7 @@ import type { ContentsModeType } from "../../../types/types";
 import { useNavigate } from "react-router-dom";
 import { GroupSettingButton } from "./GroupSettingButton";
 import { DeveloperTools } from "../../../test/createTestData";
+import { ContentsTypography } from "../../../styles/ContentsTypo";
 
 export const ContentsWrapper: React.FC<{ children: ReactNode }> = ({
 	children,
@@ -75,9 +75,9 @@ const ContentsHeader = () => {
 			}}
 		>
 			<Toolbar variant="dense">
-				<CalendarTypography role="header" sx={{ flexGrow: 1 }}>
+				<ContentsTypography role="header" sx={{ flexGrow: 1 }}>
 					{showHeaderTitle(mode)}
-				</CalendarTypography>
+				</ContentsTypography>
 				<DeveloperTools />
 				<GroupSettingButton />
 				<ThemeSwitch />
@@ -155,12 +155,12 @@ const ButtonWrapper = ({
 				}}
 			>
 				{children}
-				<CalendarTypography
+				<ContentsTypography
 					role="footer"
 					sx={{ color: mode === caption ? "icon.active" : "icon.inactive" }}
 				>
 					{buttonCaption}
-				</CalendarTypography>
+				</ContentsTypography>
 			</Stack>
 		</Button>
 	);

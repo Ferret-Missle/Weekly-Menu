@@ -1,5 +1,5 @@
 import Paper from "@mui/material/Paper";
-import { CalendarTypography } from "../../../styles/CalendarTypo";
+import { ContentsTypography } from "../../../styles/ContentsTypo";
 import type { mealType } from "../../../types/types";
 import { showMealType } from "../composable/showMealType";
 import {
@@ -38,9 +38,9 @@ export const CardsList = () => {
 const DayCard = ({ date }: { date: Date }) => {
 	return (
 		<Paper sx={{ p: 3, borderRadius: 4 }}>
-			<CalendarTypography role="cardtitle" sx={{ mb: 4 }}>
+			<ContentsTypography role="cardtitle" sx={{ mb: 4 }}>
 				{showDateString(date)}
-			</CalendarTypography>
+			</ContentsTypography>
 			<RecipeSelector type="breakfast" date={date} />
 			<RecipeSelector type="lunch" date={date} />
 			<RecipeSelector type="dinner" date={date} />
@@ -76,9 +76,9 @@ const RecipeSelector = ({ type, date }: { type: mealType; date: Date }) => {
 
 	return (
 		<>
-			<CalendarTypography role="cardsection">
+			<ContentsTypography role="cardsection">
 				{showMealType(type)}
-			</CalendarTypography>
+			</ContentsTypography>
 			<Stack spacing={1} direction="row" sx={{ mb: 3 }}>
 				<FormControl size="small" sx={{ flexGrow: 1 }}>
 					<Select

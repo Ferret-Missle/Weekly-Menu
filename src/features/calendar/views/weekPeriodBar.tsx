@@ -3,11 +3,11 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { useEffect, type ReactNode } from "react";
-import { CalendarTypography } from "../../../styles/CalendarTypo";
 import Button from "@mui/material/Button";
 import { useAtom, useSetAtom } from "jotai";
 import { dispDate } from "../../../contexts/date";
 import { getPeriodString, isDisabled } from "../composable/showDateString";
+import { ContentsTypography } from "../../../styles/ContentsTypo";
 export const WeekPeriodBar = () => {
 	const [date, setDate] = useAtom(dispDate);
 	useEffect(() => {
@@ -21,9 +21,9 @@ export const WeekPeriodBar = () => {
 					<ArrowBackIosNewIcon fontSize="small" />
 				</ButtonWrapper>
 				<Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
-					<CalendarTypography role="period">
+					<ContentsTypography role="period">
 						{getPeriodString(date)}
-					</CalendarTypography>
+					</ContentsTypography>
 				</Box>
 				<ButtonWrapper direction="next">
 					<ArrowForwardIosIcon fontSize="small" />
@@ -64,7 +64,7 @@ const ThisweekButton = () => {
 					"&:active": { transform: "scale(0.95)" },
 				}}
 			>
-				<CalendarTypography role="button">今週へ移動</CalendarTypography>
+				<ContentsTypography role="button">今週へ移動</ContentsTypography>
 			</Button>
 		</>
 	);

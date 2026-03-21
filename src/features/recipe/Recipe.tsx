@@ -1,11 +1,12 @@
-import Box from "@mui/material/Box";
-
 import { ContentsWrapper } from "../common/views/ContentsWrapper";
+import { AddRecipeFAB } from "./views/AddRecipeFAB";
+import { RecipeCardList } from "./views/RecipeCardList";
 
 export const Recipe = () => {
 	return (
 		<ContentsWrapper>
-			<Box>//todo: Recipe List</Box>
+			<RecipeCardList />
+			<AddRecipeFAB />
 		</ContentsWrapper>
 	);
 };

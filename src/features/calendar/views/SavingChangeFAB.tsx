@@ -1,6 +1,6 @@
 import Fab from "@mui/material/Fab";
 import SaveIcon from "@mui/icons-material/Save";
-import { CalendarTypography } from "../../../styles/CalendarTypo";
+import { ContentsTypography } from "../../../styles/ContentsTypo";
 import { useAtom, useAtomValue } from "jotai";
 import { saveButtonFlg } from "../../../contexts/calendarActiveFlg";
 import { usePlansUpload } from "../composable/usePlansUpload";
@@ -82,7 +82,7 @@ export const SavingChangeFAB = () => {
 				}}
 			>
 				<SaveIcon sx={{ mr: 1 }} />
-				<CalendarTypography role="button">保存</CalendarTypography>
+				<ContentsTypography role="button">保存</ContentsTypography>
 			</Fab>
 			<Snackbar
 				open={snack.open}

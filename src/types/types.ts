@@ -9,7 +9,6 @@ export type snackbarType = {
 	severity: "success" | "error"|'warning'|'info';
 };
 
-
 //AppData
 export type AppUser = {
 	//アプリ内ユーザデータ
@@ -43,10 +42,11 @@ export type WeeklyPlan = {
 export type Recipe = {
 	id: string;
 	authorId: string;
-	title: string;
+	title: string; //料理名
+	calories: number; //１食分のカロリー(kcal)
 	thumbnailUrl: string | null;
-	ingredients: string[] | null;
-	steps: string[] | null;
+	ingredients: string[] | null; //材料
+	steps: string[] | null; //調理手順
 	createdAt: Timestamp;
 	updatedAt: Timestamp;
 };
