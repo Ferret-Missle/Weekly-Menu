@@ -14,7 +14,7 @@ import { Calendar } from "./features/calendar/Calendar";
 import { ModeThemeProvider } from "./providers/theme";
 
 import type { ContentsModeType } from "./types/types";
-import { Recipe } from "./features/recipe/Recipe";
+import { Recipes } from "./features/recipe/Recipe";
 import { PurchaseList } from "./features/purchase_list/PurchaseList";
 import { useEffect } from "react";
 
@@ -38,7 +38,7 @@ const App = () => {
 						path="/recipe"
 						element={
 							<AuthGuard mode="recipe">
-								<Recipe />
+								<Recipes />
 							</AuthGuard>
 						}
 					/>

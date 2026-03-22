@@ -1,13 +1,24 @@
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import { ContentsTypography } from "../../../styles/ContentsTypo";
+import type { Recipe } from "../../../types/types";
 
-export const AddRecipeFAB = () => {
+export const AddRecipeFAB = ({
+	setOpen,
+	setRecipeData,
+}: {
+	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	setRecipeData: React.Dispatch<React.SetStateAction<Recipe | null>>;
+}) => {
 	return (
 		<>
 			<Fab
 				color="primary"
 				variant="extended"
+				onClick={() => {
+					setRecipeData(null);
+					setOpen(true);
+				}}
 				sx={{
 					position: "fixed",
 					bottom: 74,
