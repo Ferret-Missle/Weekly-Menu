@@ -24,8 +24,8 @@ export const AddRecipeDialog = ({
 	const [title, setTitle] = useState<string>(
 		recipeData === null ? "" : recipeData.title,
 	); //レシピタイトル
-	const [calories, setCalories] = useState<number>(
-		recipeData === null ? 0 : recipeData.calories,
+	const [calories, setCalories] = useState<number | null>(
+		recipeData === null ? null : recipeData.calories,
 	); //カロリー
 
 	useEffect(() => {
@@ -38,7 +38,7 @@ export const AddRecipeDialog = ({
 	const handleClose = () => {
 		setRecipeData(null);
 		setTitle("");
-		setCalories(0);
+		setCalories(null);
 		setOpen(false);
 	};
 
@@ -100,8 +100,8 @@ export const AddRecipeDialog = ({
 								},
 							}}
 						/>
-						<Stack direction={"row"} justifyContent={"right"}>
-							<Button onClick={handleClose} sx={{ px: 2 }}>
+						<Stack direction={"row"} spacing={1} justifyContent={"right"}>
+							<Button variant="outlined" onClick={handleClose} sx={{ px: 2 }}>
 								登録
 							</Button>
 							<Button onClick={handleClose} sx={{ px: 2 }}>

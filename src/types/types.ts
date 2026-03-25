@@ -43,7 +43,7 @@ export type Recipe = {
 	id: string;
 	authorId: string;
 	title: string; //料理名
-	calories: number; //１食分のカロリー(kcal)
+	calories: number | null; //１食分のカロリー(kcal)
 	thumbnailUrl: string | null;
 	ingredients: string[] | null; //材料
 	steps: string[] | null; //調理手順
