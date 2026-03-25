@@ -48,7 +48,7 @@ export type Recipe = {
 	ingredients: string[] | null; //材料
 	steps: string[] | null; //調理手順
 	createdAt: Timestamp;
-	updatedAt: Timestamp;
+	updatedAt: Timestamp | null;
 };
 
 //Auth

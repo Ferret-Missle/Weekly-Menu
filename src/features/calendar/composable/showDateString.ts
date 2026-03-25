@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export function showDateString(dateStr: Date) {
 	const date = new Date(dateStr);
 	const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"][date.getDay()];
@@ -52,3 +54,10 @@ export function formatLocalYYYYMMDD(d: Date) {
 	const day = String(t.getDate()).padStart(2, "0");
 	return `${y}-${m}-${day}`;
 }
+
+export const getJSTTimestamp = (): Timestamp => {
+	//レシピ更新用日時データ
+	const now = new Date();
+	const jst = new Date(now.getTime() + 9 * 60 * 60 * 1000); // JST = UTC+9
+	return Timestamp.fromDate(jst);
+};
