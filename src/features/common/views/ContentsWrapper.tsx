@@ -78,14 +78,17 @@ const ContentsHeader = () => {
 				<ContentsTypography role="header" sx={{ flexGrow: 1 }}>
 					{showHeaderTitle(mode)}
 				</ContentsTypography>
-				<DeveloperTools />
-				<GroupSettingButton />
-				<ThemeSwitch />
-				<SignoutButton />
+				<Stack direction={"row"} spacing={1}>
+					<DeveloperTools />
+					<GroupSettingButton />
+					<ThemeSwitch />
+					<SignoutButton />
+				</Stack>
 			</Toolbar>
 		</AppBar>
 	);
 };
+
 const ContentsNavigator = () => {
 	return (
 		<AppBar
@@ -106,13 +109,31 @@ const ContentsNavigator = () => {
 					sx={{ width: "100%" }}
 				>
 					<ButtonWrapper caption="calendar">
-						<CalendarMonthOutlinedIcon sx={{ fontSize: "28px" }} />
+						<CalendarMonthOutlinedIcon
+							sx={(theme) => ({
+								[theme.breakpoints.up("xs")]: { fontSize: "24px" },
+								[theme.breakpoints.up("sm")]: { fontSize: "20px" },
+								[theme.breakpoints.up("lg")]: { fontSize: "16px" },
+							})}
+						/>
 					</ButtonWrapper>
 					<ButtonWrapper caption="recipe">
-						<AutoStoriesOutlinedIcon sx={{ fontSize: "28px" }} />
+						<AutoStoriesOutlinedIcon
+							sx={(theme) => ({
+								[theme.breakpoints.up("xs")]: { fontSize: "24px" },
+								[theme.breakpoints.up("sm")]: { fontSize: "20px" },
+								[theme.breakpoints.up("lg")]: { fontSize: "16px" },
+							})}
+						/>
 					</ButtonWrapper>
 					<ButtonWrapper caption="list">
-						<ShoppingCartOutlinedIcon sx={{ fontSize: "28px" }} />
+						<ShoppingCartOutlinedIcon
+							sx={(theme) => ({
+								[theme.breakpoints.up("xs")]: { fontSize: "24px" },
+								[theme.breakpoints.up("sm")]: { fontSize: "20px" },
+								[theme.breakpoints.up("lg")]: { fontSize: "16px" },
+							})}
+						/>
 					</ButtonWrapper>
 				</Stack>
 			</Toolbar>
@@ -140,10 +161,19 @@ const ButtonWrapper = ({
 
 	return (
 		<Button
-			sx={{ width: "100%" }}
 			onClick={() => {
 				setMode(caption);
 				navigate(`/${caption}`);
+			}}
+			sx={{
+				width: "100%",
+				"@media (hover: hover)": {
+					"&:hover": {
+						backgroundColor: "icon.hoverBgcolor",
+						color: "icon.hoverColor",
+					},
+				},
+				"&:active": { transform: "scale(0.95)" },
 			}}
 		>
 			<Stack

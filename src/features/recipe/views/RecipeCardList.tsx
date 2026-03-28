@@ -7,6 +7,8 @@ import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 import Button from "@mui/material/Button";
 import type { Recipe } from "../../../types/types";
+import GroupsIcon from "@mui/icons-material/Groups2";
+import { myInfo } from "../../../contexts/AppUserContext";
 
 export const RecipeCardList = ({
 	setOpen,
@@ -42,6 +44,8 @@ const RecipeCard = ({
 	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	setRecipeData: React.Dispatch<React.SetStateAction<Recipe | null>>;
 }) => {
+	const user = useAtomValue(myInfo);
+
 	return (
 		<Button
 			onClick={() => {
@@ -51,17 +55,35 @@ const RecipeCard = ({
 			sx={{ margin: 0, padding: 0 }}
 		>
 			<Paper sx={{ p: 3, borderRadius: 4, width: "100%" }}>
-				<Stack direction={"row"} spacing={3}>
-					<Skeleton
-						variant="rectangular"
-						width={100}
-						height={100}
-						animation={false}
-					/>
-					<Box>
-						<ContentsTypography role="cardsection" textAlign={"left"}>
-							{recipe.title}
+				<Stack direction={"row"} spacing={3} alignItems={"flex-start"}>
+					<Box position={"relative"} width={100} height={100}>
+						<Skeleton
+							variant="rectangular"
+							width="100%"
+							height="100%"
+							animation={false}
+						/>
+						<ContentsTypography
+							role="button"
+							sx={{
+								position: "absolute",
+								top: "50%",
+								left: "50%",
+								transform: "translate(-50%, -50%)",
+								color: "text.secondary",
+								pointerEvents: "none",
+							}}
+						>
+							No Image
 						</ContentsTypography>
+					</Box>
+					<Box>
+						<Stack direction={"row"} spacing={2}>
+							<ContentsTypography role="cardsection" textAlign={"left"}>
+								{recipe.title}
+							</ContentsTypography>
+							{user?.uid !== recipe.authorId ? <SharedRecipeIcon /> : null}
+						</Stack>
 						<ContentsTypography role="period" textAlign={"left"}>
 							{recipe.calories
 								? `${recipe.calories} kcal (1人分)`
@@ -71,5 +93,18 @@ const RecipeCard = ({
 				</Stack>
 			</Paper>
 		</Button>
+	);
+};
+
+const SharedRecipeIcon = () => {
+	return (
+		<GroupsIcon
+			sx={(theme) => ({
+				color: "icon.active",
+				[theme.breakpoints.up("xs")]: { fontSize: "24px" },
+				[theme.breakpoints.up("sm")]: { fontSize: "20px" },
+				[theme.breakpoints.up("lg")]: { fontSize: "16px" },
+			})}
+		/>
 	);
 };

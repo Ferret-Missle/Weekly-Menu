@@ -10,9 +10,9 @@ export const SignoutButton = () => {
 		<IconButton onClick={() => signOut(auth)}>
 			<LogoutOutlinedIcon
 				sx={(theme) => ({
-					[theme.breakpoints.up("xs")]: { fontSize: "32px" },
-					[theme.breakpoints.up("sm")]: { fontSize: "28px" },
-					[theme.breakpoints.up("lg")]: { fontSize: "24px" },
+					[theme.breakpoints.up("xs")]: { fontSize: "24px" },
+					[theme.breakpoints.up("sm")]: { fontSize: "20px" },
+					[theme.breakpoints.up("lg")]: { fontSize: "16px" },
 				})}
 			/>
 		</IconButton>
