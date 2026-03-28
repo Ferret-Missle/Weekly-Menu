@@ -33,7 +33,7 @@ export const useAppSync = () => {
 			if (snap.exists()) {
 				setMe(snap.data() as AppUser);
 				setTheme(snap.data()?.themeMode || "light");
-				console.log("get my Info: ", snap.data());
+				// console.log("get my Info: ", snap.data());
 			}
 		});
 		return () => unsubscribeMe();
@@ -53,7 +53,7 @@ export const useAppSync = () => {
 			(snap) => {
 				if (snap.exists()) {
 					setGroup(snap.data() as group);
-					console.log("get group Info: ", snap.data());
+					// console.log("get group Info: ", snap.data());
 				}
 			},
 		);
@@ -74,7 +74,7 @@ export const useAppSync = () => {
 			doc(db, "users", group!.ownerId),
 			(snap) => {
 				if (snap.exists()) setOwner(snap.data() as AppUser);
-				console.log("get owner Info: ", snap.data());
+				// console.log("get owner Info: ", snap.data());
 			},
 		);
 		return () => unsubscribeOwner();
@@ -104,7 +104,7 @@ export const useAppSync = () => {
 		const unsubscribeRecipes = onSnapshot(q, (snap) => {
 			const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Recipe);
 			setRecipes(list);
-			console.log("Recipes fetched for:", targetIds, list);
+			// console.log("Recipes fetched for:", targetIds, list);
 		});
 
 		return () => {
@@ -125,7 +125,7 @@ export const useAppSync = () => {
 		const unsubscribe = onSnapshot(doc(db, "weeklyPlans", planId), (snap) => {
 			if (snap.exists()) {
 				setPlan({ id: snap.id, ...snap.data() } as WeeklyPlan);
-				console.log("get weekly Plans: ", snap.data());
+				// console.log("get weekly Plans: ", snap.data());
 			} else {
 				setPlan(undefined);
 			}

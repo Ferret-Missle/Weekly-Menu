@@ -27,7 +27,7 @@ const signInWithGoogle = async () => {
 	try {
 		await signInWithPopup(auth, provider);
 	} catch (error: unknown) {
-		console.log(error);
+		// console.log(error);
 		return error;
 	}
 };

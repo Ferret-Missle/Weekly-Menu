@@ -17,7 +17,7 @@ export const usePlansUpload = () => {
 	} else {
 		uid = owner?.uid ?? "";
 	}
-	console.log("plan Upload-uid: ", uid);
+	// console.log("plan Upload-uid: ", uid);
 
 	const saveAll = async () => {
 		if (!uid) throw new Error("not signed in *it's impossible pattern... ");

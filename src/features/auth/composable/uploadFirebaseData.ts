@@ -6,11 +6,11 @@ export const uploadDisplayPlan = async (value: string, userId: string) => {
 
 	const userRef = doc(db, "users", userId);
 
-	console.log("value secondtime: ", value);
+	// console.log("value secondtime: ", value);
 	try {
 		await updateDoc(userRef, { displayPlan: value });
-		console.log("displayPlan on Firestore updated to: ", value);
+		// console.log("displayPlan on Firestore updated to: ", value);
 	} catch (error) {
 		console.error("Failed to update displayPlan: ", error);
 	}
-};
+};;

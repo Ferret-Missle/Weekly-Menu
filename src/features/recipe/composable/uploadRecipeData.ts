@@ -36,7 +36,7 @@ export const uploadRecipeData = async (
 		if (newRecipe) {
 			await setDoc(ref, newRecipe);
 		}
-		console.log("recipe on Firestore updated to: ", newRecipe);
+		// console.log("recipe on Firestore updated to: ", newRecipe);
 	} catch (error) {
 		console.error("failed to update recipeData: ", error);
 	}

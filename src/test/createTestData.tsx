@@ -11,7 +11,7 @@ export const DeveloperTools = () => {
 		if (nextCount >= 5) {
 			setCount(0); // リセット
 			if (window.confirm("テストデータを注入しますか？")) {
-				console.log("userId: ", uid);
+				// console.log("userId: ", uid);
 				await seedTestData(uid);
 			}
 		} else {

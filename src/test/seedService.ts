@@ -112,8 +112,8 @@ export const seedTestData = async (userId: string) => {
 
 	try {
 		await batch.commit();
-		console.log("ALFA_Sync: 7週間分のシードデータ注入に成功しました。");
+		// console.log("7週間分のシードデータ注入に成功しました。");
 	} catch (error) {
-		console.error("ALFA_Sync: シード注入失敗:", error);
+		console.error("シード注入失敗:", error);
 	}
 };;
