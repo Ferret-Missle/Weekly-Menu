@@ -10,7 +10,6 @@ export const uploadRecipeData = async (
 	title: string,
 	calories: number,
 ) => {
-	console.log("updateRecipe start");
 	const recipeId = recipe ? recipe.id : uuidv4();
 	const ref = doc(db, "recipes", recipeId);
 
@@ -34,7 +33,7 @@ export const uploadRecipeData = async (
 			};
 
 	try {
-		if (recipe) {
+		if (newRecipe) {
 			await setDoc(ref, newRecipe);
 		}
 		console.log("recipe on Firestore updated to: ", newRecipe);

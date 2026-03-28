@@ -50,27 +50,31 @@ export const AddRecipeDialog = ({
 	const handleSubmit = () => {
 		//レシピ更新時の処理
 		//自分のレシピだけ更新できるように制限付き
-		console.log("handleSubmit start");
 		uploadRecipeData(user!.uid, recipeData!, title, calories!);
 		handleClose(); //初期化処理
-		console.log("handleSubmit end");
 	};
 
+	const isAuthor = () => {
+		//著者の場合はtrue
+		let isauthor = false;
+
+		if (recipeData === null) {
+			isauthor = true;
+		} else if (recipeData.authorId === user?.uid) {
+			//レシピオーナーと一致の場合は不許可
+			isauthor = true;
+		}
+		return isauthor;
+	};
 	const isDisabled = () => {
 		let isdisabled = true;
 
-		if (recipeData === null) {
-			//新規作成の場合は許可
-			isdisabled = false;
-		} else if (recipeData.authorId === user?.uid) {
-			//レシピオーナーと一致の場合は不許可
-			isdisabled = false;
-		} else if (!title.trim() && !calories) {
+		if (!title.trim() && !calories) {
 			//入力欄が空欄でなければ許可
 			isdisabled = false;
 		}
 
-		return isdisabled;
+		return isdisabled && !isAuthor();
 	};
 
 	return (
@@ -112,7 +116,6 @@ export const AddRecipeDialog = ({
 							size="small"
 							label="カロリー (kcal 1人分)"
 							type="number"
-							autoFocus
 							value={calories !== null ? String(calories) : ""}
 							onChange={(e) =>
 								setCalories(
@@ -150,6 +153,7 @@ export const AddRecipeDialog = ({
 								</ContentsTypography>
 							</Button>
 						</Stack>
+						{}
 					</Stack>
 				</Box>
 			</DialogContent>
