@@ -66,6 +66,7 @@ export const AddRecipeDialog = ({
 		}
 		return isauthor;
 	};
+
 	const isDisabled = () => {
 		let isdisabled = true;
 
