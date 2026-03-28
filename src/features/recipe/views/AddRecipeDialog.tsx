@@ -22,7 +22,7 @@ export const AddRecipeDialog = ({
 	recipeData: Recipe | null;
 	setRecipeData: React.Dispatch<React.SetStateAction<Recipe | null>>;
 }) => {
-	const user=useAtomValue(myInfo);
+	const user = useAtomValue(myInfo);
 
 	const [title, setTitle] = useState<string>(
 		recipeData === null ? "" : recipeData.title,
@@ -47,12 +47,30 @@ export const AddRecipeDialog = ({
 		setOpen(false);
 	};
 
-	const handleSubmit=()=>{//レシピ更新時の処理
+	const handleSubmit = () => {
+		//レシピ更新時の処理
 		//自分のレシピだけ更新できるように制限付き
-		console.log('handleSubmit start');
-		uploadRecipeData(user!.uid,recipeData!,title,calories!);
-		handleClose();//初期化処理
+		console.log("handleSubmit start");
+		uploadRecipeData(user!.uid, recipeData!, title, calories!);
+		handleClose(); //初期化処理
 		console.log("handleSubmit end");
+	};
+
+	const isDisabled = () => {
+		let isdisabled = true;
+
+		if (recipeData === null) {
+			//新規作成の場合は許可
+			isdisabled = false;
+		} else if (recipeData.authorId === user?.uid) {
+			//レシピオーナーと一致の場合は不許可
+			isdisabled = false;
+		} else if (!title.trim() && !calories) {
+			//入力欄が空欄でなければ許可
+			isdisabled = false;
+		}
+
+		return isdisabled;
 	};
 
 	return (
@@ -97,7 +115,9 @@ export const AddRecipeDialog = ({
 							autoFocus
 							value={calories !== null ? String(calories) : ""}
 							onChange={(e) =>
-								setCalories(e.target.value===''?null:Number(e.target.value))
+								setCalories(
+									e.target.value === "" ? null : Number(e.target.value),
+								)
 							}
 							sx={{
 								color: "black",
@@ -118,12 +138,7 @@ export const AddRecipeDialog = ({
 						<Stack direction={"row"} spacing={1} justifyContent={"right"}>
 							<Button
 								variant="outlined"
-								disabled={
-									!title ||
-									!calories ||
-									(recipeData?.authorId === "" &&
-										recipeData?.authorId !== user?.uid)
-								}
+								disabled={isDisabled()}
 								onClick={handleSubmit}
 								sx={{ px: 2 }}
 							>
