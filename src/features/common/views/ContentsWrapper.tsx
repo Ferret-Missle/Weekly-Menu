@@ -14,7 +14,7 @@ import { showHeaderTitle } from "../composable/showHeaderTitle";
 import { SignoutButton } from "./SignoutButton";
 import { ThemeSwitch } from "./ThemeSwitch";
 
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import type { ContentsModeType } from "../../../types/types";
 import { useNavigate } from "react-router-dom";
 import { GroupSettingButton } from "./GroupSettingButton";
