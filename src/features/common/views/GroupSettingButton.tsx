@@ -133,7 +133,7 @@ const GroupSettingMenu = ({
 						control={
 							<Switch
 								checked={canEdit}
-								onChange={(event, checked) => {
+								onChange={(_, checked) => {
 									setCanEdit(checked);
 									canMemberEditPlanUpdate(user!, !checked);
 								}}
@@ -149,7 +149,7 @@ const GroupSettingMenu = ({
 					control={
 						<Switch
 							checked={isShared}
-							onChange={(event, checked) => {
+							onChange={(_, checked) => {
 								setIsShared(checked);
 								isRecipeSharedUpdate(user!, !checked);
 							}}
