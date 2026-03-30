@@ -24,7 +24,7 @@ export type AppUser = {
 };
 export type group = {
 	id: string;
-	name: string;
+	groupName: string;
 	ownerId: string;
 	memberIds: string[];
 };

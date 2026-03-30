@@ -49,10 +49,14 @@ const GroupSettingMenu = ({
 	handleClose: () => void;
 }) => {
 	const group = useAtomValue(groupInfo);
-	const [groupName, setGroupName] = useState<string>(group ? group.name : "");
+	const [groupName, setGroupName] = useState<string>(
+		group ? group.groupName : "",
+	);
 	useEffect(() => {
-		setGroupName(group ? group.name : "");
-	}, [group]);
+		setGroupName(group ? group.groupName : "");
+	}, [group, open]);
+
+	console.log("group: ", group?.groupName);
 
 	return (
 		<Popover
