@@ -13,4 +13,4 @@ export const uploadDisplayPlan = async (value: string, userId: string) => {
 	} catch (error) {
 		console.error("Failed to update displayPlan: ", error);
 	}
-};;
+};

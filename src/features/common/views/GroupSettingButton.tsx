@@ -9,6 +9,13 @@ import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAtomValue } from "jotai";
 import { groupInfo } from "../../../contexts/groupContext";
+import { myInfo } from "../../../contexts/AppUserContext";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import {
+	canMemberEditPlanUpdate,
+	isRecipeSharedUpdate,
+} from "../../recipe/composable/uploadUserData";
 export const GroupSettingButton = () => {
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -48,6 +55,7 @@ const GroupSettingMenu = ({
 	anchorEl: HTMLElement | null;
 	handleClose: () => void;
 }) => {
+	const user = useAtomValue(myInfo);
 	const group = useAtomValue(groupInfo);
 	const [groupName, setGroupName] = useState<string>(
 		group ? group.groupName : "",
@@ -56,7 +64,16 @@ const GroupSettingMenu = ({
 		setGroupName(group ? group.groupName : "");
 	}, [group, open]);
 
-	console.log("group: ", group?.groupName);
+	const isOwner = group?.ownerId === user?.uid; //オーナーの場合はtrue
+
+	const [canEdit, setCanEdit] = useState<boolean>(
+		user ? user?.canMemberEditPlan : false,
+	);
+	const [isShared, setIsShared] = useState<boolean>(
+		user ? user?.isRecipeShared : false,
+	);
+
+	console.log("group: ", group);
 
 	return (
 		<Popover
@@ -73,10 +90,10 @@ const GroupSettingMenu = ({
 			}}
 			sx={{ borderRadius: "8px" }}
 		>
-			<Stack spacing={2} color={"customBackground.paper"} sx={{ margin: 2 }}>
+			<Stack spacing={3} color={"customBackground.paper"} sx={{ margin: 2 }}>
 				<ContentsTypography role="cardsection">グループ設定</ContentsTypography>
 				<Stack>
-					<ContentsTypography role="cardcaption">
+					<ContentsTypography role="cardcaption" sx={{ marginBottom: 1 }}>
 						現在のグループ
 					</ContentsTypography>
 					<TextField
@@ -86,6 +103,7 @@ const GroupSettingMenu = ({
 						type="text"
 						value={groupName}
 						onChange={(e) => setGroupName(e.target.value)}
+						slotProps={{ input: { readOnly: !isOwner } }}
 						sx={{
 							"& .MuiOutlinedInput-root": {
 								borderRadius: "8px",
@@ -106,7 +124,42 @@ const GroupSettingMenu = ({
 							},
 						}}
 					/>
+					<ContentsTypography role="footer" sx={{ marginTop: 1 }}>
+						※オーナーのみ変更可能
+					</ContentsTypography>
 				</Stack>
+				{group?.id === user?.uid ? (
+					<FormControlLabel
+						control={
+							<Switch
+								checked={canEdit}
+								onChange={(event, checked) => {
+									setCanEdit(checked);
+									canMemberEditPlanUpdate(user!, !checked);
+								}}
+							/>
+						}
+						label="献立プランの変更の許可"
+						slotProps={{
+							typography: { fontSize: "0.8rem" },
+						}}
+					/>
+				) : null}
+				<FormControlLabel
+					control={
+						<Switch
+							checked={isShared}
+							onChange={(event, checked) => {
+								setIsShared(checked);
+								isRecipeSharedUpdate(user!, !checked);
+							}}
+						/>
+					}
+					label="他メンバーへのレシピ共有"
+					slotProps={{
+						typography: { fontSize: "0.8rem" },
+					}}
+				/>
 				<Stack spacing={1}>
 					<Button
 						variant="contained"
