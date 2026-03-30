@@ -73,6 +73,11 @@ const GroupSettingMenu = ({
 		user ? user?.isRecipeShared : false,
 	);
 
+	useEffect(() => {
+		setCanEdit(user ? user?.canMemberEditPlan : false);
+		setIsShared(user ? user?.isRecipeShared : false);
+	}, [user]);
+
 	console.log("group: ", group);
 
 	return (
@@ -128,7 +133,7 @@ const GroupSettingMenu = ({
 						※オーナーのみ変更可能
 					</ContentsTypography>
 				</Stack>
-				{group?.id === user?.uid ? (
+				{group?.ownerId === user?.uid ? (
 					<FormControlLabel
 						control={
 							<Switch
