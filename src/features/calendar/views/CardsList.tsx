@@ -36,9 +36,26 @@ export const CardsList = () => {
 };
 
 const DayCard = ({ date }: { date: Date }) => {
+	const isToday = formatLocalYYYYMMDD(date) === formatLocalYYYYMMDD(new Date());
+
 	return (
-		<Paper sx={{ p: 3, borderRadius: 4 }}>
-			<ContentsTypography role="cardtitle" sx={{ mb: 4 }}>
+		<Paper
+			sx={{
+				p: 3,
+				borderRadius: 4,
+				border: (theme) =>
+					isToday
+						? `1px solid ${theme.palette.primary.main}`
+						: "1px solid transparent",
+			}}
+		>
+			<ContentsTypography
+				role="cardtitle"
+				sx={{
+					mb: 4,
+					color: isToday ? "primary.main" : "text.primary",
+				}}
+			>
 				{showDateString(date)}
 			</ContentsTypography>
 			<RecipeSelector type="breakfast" date={date} />
